@@ -1,0 +1,2093 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FennecGlobe — Global Intelligence Platform</title>
+<meta name="description" content="FennecGlobe: Real-time global intelligence, news, markets, and geopolitical monitoring across 192 countries.">
+<meta name="theme-color" content="#006233">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; img-src * data:; connect-src *;">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════
+   FENNECGLOBE – COMPLETE THEME SYSTEM
+═══════════════════════════════════════════════════════════ */
+:root {
+  --primary: #006233;
+  --primary-light: #00b35a;
+  --primary-dark: #00421f;
+  --bg: #003d1f;
+  --panel-bg: #00421f;
+  --panel-header: #004d25;
+  --text: #f0fff8;
+  --text-secondary: #8dd4ac;
+  --border: rgba(0,178,90,0.2);
+  --border-strong: rgba(0,178,90,0.35);
+  --glow: rgba(0,178,90,0.25);
+  --shadow: rgba(0,30,15,0.5);
+  --accent-red: #ff4444;
+  --accent-gold: #f5c518;
+  --accent-blue: #4a9eff;
+  --accent-orange: #ff8c42;
+  --transition: 0.2s cubic-bezier(0.4,0,0.2,1);
+}
+[data-theme="dark"] {
+  --primary: #0a84ff;
+  --primary-light: #5eb8ff;
+  --primary-dark: #002b5e;
+  --bg: #0b1a2f;
+  --panel-bg: #11253d;
+  --panel-header: #1a2f4a;
+  --text: #e6f0ff;
+  --text-secondary: #a0c0f0;
+  --border: rgba(10,132,255,0.2);
+  --border-strong: rgba(10,132,255,0.35);
+  --glow: rgba(10,132,255,0.25);
+  --shadow: rgba(0,10,30,0.6);
+}
+[data-theme="light"] {
+  --primary: #0070e0;
+  --primary-light: #4098ff;
+  --primary-dark: #005bb5;
+  --bg: #f0f5ff;
+  --panel-bg: #ffffff;
+  --panel-header: #e2ecff;
+  --text: #1a2639;
+  --text-secondary: #3a4e6b;
+  --border: rgba(0,112,224,0.15);
+  --border-strong: rgba(0,112,224,0.3);
+  --glow: rgba(0,112,224,0.15);
+  --shadow: rgba(0,20,50,0.1);
+}
+[data-theme="cyber"] {
+  --primary: #a020f0;
+  --primary-light: #c45eff;
+  --primary-dark: #6a0dad;
+  --bg: #120b1f;
+  --panel-bg: #1e1433;
+  --panel-header: #2a1b47;
+  --text: #f0e6ff;
+  --text-secondary: #c7a8ff;
+  --border: rgba(160,32,240,0.25);
+  --border-strong: rgba(160,32,240,0.45);
+  --glow: rgba(160,32,240,0.3);
+  --shadow: rgba(0,0,0,0.7);
+  --accent-gold: #ff00aa;
+  --accent-blue: #00ffff;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+  min-height:100vh;
+  transition:background 0.35s,color 0.2s;
+}
+::selection{background:rgba(0,178,90,0.3);}
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--primary-light);border-radius:3px;}
+a{color:var(--primary-light);text-decoration:none;}
+button{cursor:pointer;font-family:inherit;}
+
+/* ═══════ LAUNCHER ═══════ */
+#launcher{
+  position:fixed;inset:0;z-index:9999;
+  background:radial-gradient(ellipse at 50% 40%,#005228 0%,#002d14 40%,#001a0b 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  transition:opacity 1s ease,transform 1s ease;
+}
+#launcher.out{opacity:0;transform:scale(1.04);pointer-events:none;}
+.lp-wrap{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
+.lp{
+  position:absolute;border-radius:50%;
+  animation:lpf linear infinite;
+}
+@keyframes lpf{
+  0%{transform:translateY(105vh);opacity:0;}
+  5%{opacity:1;}95%{opacity:0.5;}
+  100%{transform:translateY(-50px);opacity:0;}
+}
+.l-globe{
+  width:150px;height:150px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,rgba(255,255,255,0.9),rgba(0,178,90,0.15));
+  box-shadow:0 0 60px rgba(0,178,90,0.9),0 0 130px rgba(0,178,90,0.4),inset 0 0 40px rgba(255,255,255,0.15);
+  display:flex;align-items:center;justify-content:center;font-size:70px;
+  animation:gfloat 3s ease-in-out infinite,gglow 2s ease alternate infinite;
+}
+@keyframes gfloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-18px);}}
+@keyframes gglow{
+  from{box-shadow:0 0 60px rgba(0,178,90,0.9),0 0 130px rgba(0,178,90,0.4);}
+  to{box-shadow:0 0 90px rgba(77,255,160,1),0 0 180px rgba(0,178,90,0.8);}
+}
+.l-title{font-size:2.8rem;font-weight:700;color:#fff;margin-top:28px;letter-spacing:1px;text-shadow:0 0 40px rgba(0,178,90,0.7);animation:fadeUp 1s ease 0.3s both;}
+.l-sub{font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:rgba(0,220,110,0.8);letter-spacing:4px;text-transform:uppercase;margin-top:8px;animation:fadeUp 1s ease 0.6s both;}
+.l-bar{width:220px;height:2px;background:rgba(0,178,90,0.2);border-radius:1px;margin-top:38px;overflow:hidden;animation:fadeUp 1s ease 0.9s both;}
+.l-fill{height:100%;background:linear-gradient(90deg,var(--primary-light),#4dffa0);animation:lfill 2.5s ease forwards;}
+@keyframes lfill{from{width:0%;}to{width:100%;}}
+.l-status{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:rgba(0,220,110,0.55);margin-top:14px;animation:fadeUp 1s ease 1s both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:none;}}
+
+/* ═══════ NAV ═══════ */
+#nav{
+  position:sticky;top:0;z-index:900;
+  background:rgba(0,40,20,0.92);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+  padding:0 20px;
+  transition:background 0.3s;
+}
+[data-theme="dark"] #nav{background:rgba(11,26,47,0.93);}
+[data-theme="light"] #nav{background:rgba(255,255,255,0.95);}
+[data-theme="cyber"] #nav{background:rgba(18,11,31,0.94);}
+.nav-i{
+  max-width:1700px;margin:0 auto;
+  display:flex;align-items:center;gap:12px;height:56px;
+}
+#bk-tog{
+  background:var(--panel-bg);border:1px solid var(--border);
+  color:var(--text);border-radius:8px;padding:6px 10px;
+  font-size:0.75rem;display:flex;align-items:center;gap:5px;
+  transition:all var(--transition);white-space:nowrap;
+}
+#bk-tog:hover{border-color:var(--primary-light);background:var(--panel-header);}
+.bt-lbl{font-family:'JetBrains Mono',monospace;}
+.n-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.n-logo-ico{width:36px;height:36px;border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,0.7),rgba(0,178,90,0.2));box-shadow:0 0 14px var(--glow);display:flex;align-items:center;justify-content:center;font-size:18px;}
+.n-logo-name{font-size:1rem;font-weight:700;color:var(--text);line-height:1;}
+.n-logo-tag{font-family:'JetBrains Mono',monospace;font-size:0.58rem;color:var(--text-secondary);letter-spacing:2px;text-transform:uppercase;}
+.n-search{
+  flex:1;max-width:380px;
+  position:relative;margin-left:8px;
+}
+.n-search input{
+  width:100%;background:var(--panel-bg);
+  border:1px solid var(--border);border-radius:20px;
+  padding:7px 14px 7px 36px;
+  color:var(--text);font-size:0.82rem;
+  transition:all var(--transition);
+}
+.n-search input:focus{outline:none;border-color:var(--primary-light);box-shadow:0 0 0 3px var(--glow);}
+.n-search input::placeholder{color:var(--text-secondary);}
+.n-search-ico{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:14px;pointer-events:none;}
+.nav-links{display:flex;gap:4px;margin-left:4px;}
+.nl{
+  background:none;border:none;color:var(--text-secondary);
+  padding:6px 10px;border-radius:6px;font-size:0.8rem;
+  display:flex;align-items:center;gap:5px;
+  transition:all var(--transition);white-space:nowrap;
+}
+.nl:hover,.nl.active{background:var(--panel-bg);color:var(--text);}
+.nl .dot{width:7px;height:7px;border-radius:50%;background:var(--accent-red);animation:pulse 1.5s ease infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:10px;}
+.nav-icon-btn{
+  width:36px;height:36px;border-radius:50%;
+  background:var(--panel-bg);border:1px solid var(--border);
+  color:var(--text-secondary);font-size:16px;
+  display:flex;align-items:center;justify-content:center;
+  transition:all var(--transition);position:relative;
+}
+.nav-icon-btn:hover{border-color:var(--primary-light);color:var(--text);box-shadow:0 0 10px var(--glow);}
+.badge{
+  position:absolute;top:-3px;right:-3px;
+  width:16px;height:16px;border-radius:50%;
+  background:var(--accent-red);color:#fff;
+  font-size:9px;display:flex;align-items:center;justify-content:center;
+  font-weight:600;border:2px solid var(--bg);
+}
+.auth-btn-nav{
+  background:var(--primary);border:none;color:#fff;
+  padding:7px 16px;border-radius:20px;font-size:0.8rem;font-weight:600;
+  transition:all var(--transition);
+}
+.auth-btn-nav:hover{background:var(--primary-light);box-shadow:0 0 14px var(--glow);}
+.user-avatar{
+  width:34px;height:34px;border-radius:50%;
+  background:linear-gradient(135deg,var(--primary),var(--primary-light));
+  border:2px solid var(--primary-light);
+  display:none;align-items:center;justify-content:center;
+  font-size:14px;font-weight:700;color:#fff;cursor:pointer;
+}
+.user-avatar.visible{display:flex;}
+
+/* ═══════ BREAKING BAR ═══════ */
+.breaking-bar{
+  background:linear-gradient(90deg,var(--accent-red),#cc1111);
+  padding:6px 20px;display:flex;align-items:center;gap:12px;
+}
+.bb-label{
+  font-size:0.7rem;font-weight:700;letter-spacing:2px;
+  color:#fff;text-transform:uppercase;white-space:nowrap;
+  background:rgba(0,0,0,0.25);padding:2px 8px;border-radius:3px;
+}
+.bb-text{font-size:0.8rem;color:#fff;font-weight:500;}
+.bb-close{margin-left:auto;background:none;border:none;color:#fff;font-size:16px;opacity:0.7;padding:0 4px;}
+.bb-close:hover{opacity:1;}
+
+/* ═══════ TICKER ═══════ */
+#ticker-bar{
+  background:var(--panel-bg);
+  border-bottom:1px solid var(--border);
+  padding:0 20px;display:flex;align-items:center;gap:0;
+  height:34px;overflow:hidden;
+}
+.tick-label{
+  font-family:'JetBrains Mono',monospace;font-size:0.65rem;
+  color:var(--primary-light);letter-spacing:2px;text-transform:uppercase;
+  padding:0 14px 0 0;white-space:nowrap;border-right:1px solid var(--border);margin-right:14px;
+  flex-shrink:0;
+}
+.ticker-track{
+  display:flex;gap:0;animation:tickscroll 60s linear infinite;
+  white-space:nowrap;
+}
+.ticker-track:hover{animation-play-state:paused;}
+@keyframes tickscroll{0%{transform:translateX(0);}100%{transform:translateX(-50%)}}
+.tick-item{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:0 20px;border-right:1px solid var(--border);
+  font-size:0.75rem;color:var(--text);
+}
+.tick-sym{font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--primary-light);}
+.tick-val{font-weight:600;}
+.tick-chg{font-family:'JetBrains Mono',monospace;font-size:0.7rem;}
+.tick-up{color:#00e676;}
+.tick-dn{color:var(--accent-red);}
+.tick-sep{color:var(--text-secondary);opacity:0.3;padding:0 4px;}
+
+/* ═══════ LAYOUT ═══════ */
+#layout{
+  display:flex;
+  max-width:1700px;margin:0 auto;
+  padding:0 16px 40px;
+  gap:18px;
+  transition:padding 0.3s;
+}
+
+/* ═══════ BOOKMARK SIDEBAR ═══════ */
+#bk-sb{
+  width:260px;flex-shrink:0;
+  padding-top:18px;
+  transition:width 0.3s,opacity 0.3s,transform 0.3s;
+  position:sticky;top:74px;height:calc(100vh - 74px);
+  overflow-y:auto;
+}
+#bk-sb.hidden{width:0;opacity:0;pointer-events:none;overflow:hidden;}
+.sb-section{margin-bottom:18px;}
+.sb-title{
+  font-family:'JetBrains Mono',monospace;font-size:0.65rem;
+  color:var(--text-secondary);letter-spacing:3px;text-transform:uppercase;
+  margin-bottom:8px;padding:0 6px;
+}
+.sb-item{
+  display:flex;align-items:center;gap:10px;
+  padding:9px 10px;border-radius:8px;
+  border:1px solid transparent;cursor:pointer;
+  transition:all var(--transition);font-size:0.82rem;
+  margin-bottom:3px;
+}
+.sb-item:hover{background:var(--panel-bg);border-color:var(--border);}
+.sb-item.active{background:var(--panel-bg);border-color:var(--border-strong);color:var(--primary-light);}
+.sb-ico{width:28px;height:28px;border-radius:6px;background:var(--panel-header);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
+.sb-label{flex:1;font-size:0.8rem;}
+.sb-count{font-family:'JetBrains Mono',monospace;font-size:0.65rem;background:var(--panel-header);padding:2px 6px;border-radius:10px;color:var(--text-secondary);}
+.sb-count.red{background:rgba(255,68,68,0.15);color:var(--accent-red);}
+.sb-add-btn{
+  width:100%;background:none;border:1px dashed var(--border);
+  border-radius:8px;color:var(--text-secondary);padding:8px;
+  font-size:0.78rem;transition:all var(--transition);margin-top:4px;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+}
+.sb-add-btn:hover{border-color:var(--primary-light);color:var(--primary-light);}
+
+/* ═══════ MAIN CONTENT ═══════ */
+#main{flex:1;min-width:0;padding-top:18px;}
+
+/* ═══════ HERO STATS ═══════ */
+.hero-stats{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:12px;
+  margin-bottom:18px;
+}
+.hs-card{
+  background:var(--panel-bg);
+  border:1px solid var(--border);
+  border-radius:12px;padding:14px 16px;
+  transition:all var(--transition);
+  position:relative;overflow:hidden;
+}
+.hs-card::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--glow) 0%,transparent 60%);
+  pointer-events:none;
+}
+.hs-card:hover{border-color:var(--border-strong);box-shadow:0 4px 20px var(--glow);}
+.hsc-label{font-size:0.68rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;}
+.hsc-val{font-size:1.7rem;font-weight:700;line-height:1;font-family:'JetBrains Mono',monospace;}
+.hsc-sub{font-size:0.72rem;color:var(--text-secondary);margin-top:5px;display:flex;align-items:center;gap:5px;}
+.hsc-sub .up{color:#00e676;}
+.hsc-sub .dn{color:var(--accent-red);}
+.hsc-ico{position:absolute;top:12px;right:14px;font-size:22px;opacity:0.35;}
+
+/* ═══════ PANELS GRID ═══════ */
+.panels-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+.panel{
+  background:var(--panel-bg);
+  border:1px solid var(--border);
+  border-radius:14px;
+  overflow:hidden;
+  transition:border-color var(--transition),box-shadow var(--transition);
+}
+.panel:hover{border-color:var(--border-strong);}
+.panel.wide{grid-column:span 2;}
+.panel.full{grid-column:span 3;}
+.ph{
+  display:flex;align-items:center;gap:10px;
+  padding:12px 16px;
+  background:var(--panel-header);
+  border-bottom:1px solid var(--border);
+}
+.ph-ico{font-size:16px;}
+.ph-title{font-size:0.85rem;font-weight:600;flex:1;}
+.ph-badge{
+  font-family:'JetBrains Mono',monospace;font-size:0.6rem;
+  padding:2px 8px;border-radius:10px;font-weight:600;letter-spacing:1px;
+}
+.ph-badge.red{background:rgba(255,68,68,0.15);color:var(--accent-red);border:1px solid rgba(255,68,68,0.25);}
+.ph-badge.green{background:rgba(0,200,100,0.15);color:#00e676;border:1px solid rgba(0,200,100,0.25);}
+.ph-badge.gold{background:rgba(245,197,24,0.15);color:var(--accent-gold);border:1px solid rgba(245,197,24,0.25);}
+.ph-badge.blue{background:rgba(74,158,255,0.15);color:var(--accent-blue);border:1px solid rgba(74,158,255,0.25);}
+.ph-controls{display:flex;gap:6px;margin-left:auto;}
+.ph-btn{
+  background:none;border:1px solid var(--border);border-radius:6px;
+  color:var(--text-secondary);padding:4px 8px;font-size:0.72rem;
+  transition:all var(--transition);display:flex;align-items:center;gap:4px;
+}
+.ph-btn:hover{border-color:var(--primary-light);color:var(--primary-light);}
+.pb{padding:16px;}
+.pb.np{padding:0;}
+.pb.tall{min-height:320px;}
+
+/* ═══════ MAP PANEL ═══════ */
+.map-wrap{
+  position:relative;border-radius:10px;overflow:hidden;
+  background:linear-gradient(135deg,#0a2a1a,#061a10);
+  min-height:340px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 400'%3E%3Crect fill='%23061a10' width='800' height='400'/%3E%3Cellipse cx='160' cy='180' rx='130' ry='90' fill='%23004d20' opacity='0.7'/%3E%3Cellipse cx='400' cy='150' rx='200' ry='110' fill='%23004d20' opacity='0.6'/%3E%3Cellipse cx='620' cy='200' rx='150' ry='100' fill='%23004d20' opacity='0.65'/%3E%3Cellipse cx='100' cy='300' rx='80' ry='50' fill='%23004d20' opacity='0.5'/%3E%3Cellipse cx='500' cy='320' rx='120' ry='60' fill='%23004d20' opacity='0.5'/%3E%3C/svg%3E");
+  background-size:cover;
+}
+.hs{position:absolute;cursor:pointer;}
+.hs::before{
+  content:'';width:12px;height:12px;border-radius:50%;
+  display:block;animation:hspulse 2s ease infinite;
+}
+.hs-r::before{background:var(--accent-red);box-shadow:0 0 0 0 rgba(255,68,68,0.7);}
+.hs-o::before{background:var(--accent-orange);box-shadow:0 0 0 0 rgba(255,140,66,0.7);}
+.hs-g::before{background:#00e676;box-shadow:0 0 0 0 rgba(0,230,118,0.7);}
+@keyframes hspulse{
+  0%{transform:scale(1);box-shadow:0 0 0 0 currentColor;}
+  70%{transform:scale(1.1);box-shadow:0 0 0 8px transparent;}
+  100%{transform:scale(1);box-shadow:0 0 0 0 transparent;}
+}
+.hs-tip{
+  position:absolute;left:18px;top:-5px;
+  background:rgba(0,0,0,0.85);border:1px solid var(--border-strong);
+  color:#fff;font-size:0.68rem;padding:4px 8px;border-radius:5px;
+  white-space:nowrap;pointer-events:none;
+  opacity:0;transition:opacity 0.2s;
+}
+.hs:hover .hs-tip{opacity:1;}
+.map-overlay{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:14px;
+  background:rgba(0,15,8,0.55);backdrop-filter:blur(2px);
+  text-align:center;padding:20px;
+}
+.map-globe-big{font-size:54px;animation:gfloat 3s ease-in-out infinite;}
+.map-cta h3{font-size:1rem;font-weight:600;color:#fff;margin-bottom:6px;}
+.map-cta p{font-size:0.78rem;color:rgba(255,255,255,0.7);max-width:280px;}
+.map-overlay button{
+  background:var(--primary);border:none;color:#fff;
+  padding:9px 20px;border-radius:20px;font-size:0.82rem;font-weight:600;
+  transition:all var(--transition);
+}
+.map-overlay button:hover{background:var(--primary-light);box-shadow:0 0 20px var(--glow);}
+.map-legend{
+  position:absolute;bottom:12px;left:12px;
+  display:flex;gap:14px;
+  background:rgba(0,0,0,0.6);border-radius:8px;padding:6px 10px;
+}
+.ml-item{display:flex;align-items:center;gap:5px;font-size:0.68rem;color:rgba(255,255,255,0.8);}
+.ml-dot{width:8px;height:8px;border-radius:50%;}
+.map-layers{
+  display:flex;gap:8px;flex-wrap:wrap;padding:12px 16px;
+  border-top:1px solid var(--border);background:var(--panel-header);
+}
+.layer-btn{
+  background:var(--panel-bg);border:1px solid var(--border);
+  border-radius:6px;color:var(--text-secondary);padding:5px 10px;
+  font-size:0.72rem;transition:all var(--transition);display:flex;align-items:center;gap:5px;
+}
+.layer-btn:hover,.layer-btn.active{
+  border-color:var(--primary-light);color:var(--primary-light);
+  background:rgba(0,178,90,0.05);
+}
+
+/* ═══════ NEWS FEED ═══════ */
+.news-list{display:flex;flex-direction:column;gap:0;}
+.news-item{
+  display:flex;gap:12px;padding:12px 16px;
+  border-bottom:1px solid var(--border);
+  transition:background var(--transition);cursor:pointer;
+}
+.news-item:last-child{border-bottom:none;}
+.news-item:hover{background:var(--panel-header);}
+.news-src{
+  font-family:'JetBrains Mono',monospace;font-size:0.6rem;
+  color:var(--primary-light);text-transform:uppercase;letter-spacing:1px;
+  white-space:nowrap;margin-top:2px;
+}
+.news-body{flex:1;min-width:0;}
+.news-title{font-size:0.82rem;font-weight:500;line-height:1.35;margin-bottom:4px;}
+.news-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.news-time{font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--text-secondary);}
+.news-tag{
+  font-size:0.62rem;padding:1px 6px;border-radius:4px;font-weight:600;
+  text-transform:uppercase;letter-spacing:1px;
+}
+.tag-r{background:rgba(255,68,68,0.12);color:var(--accent-red);}
+.tag-g{background:rgba(0,200,100,0.12);color:#00e676;}
+.tag-b{background:rgba(74,158,255,0.12);color:var(--accent-blue);}
+.tag-o{background:rgba(255,140,66,0.12);color:var(--accent-orange);}
+.tag-gd{background:rgba(245,197,24,0.12);color:var(--accent-gold);}
+.news-flag{font-size:16px;flex-shrink:0;}
+.news-load-more{
+  width:100%;background:none;border:none;border-top:1px solid var(--border);
+  color:var(--primary-light);padding:12px;font-size:0.78rem;
+  transition:background var(--transition);
+}
+.news-load-more:hover{background:var(--panel-header);}
+
+/* ═══════ MARKETS PANEL ═══════ */
+.mkt-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px 16px;}
+.mkt-card{
+  background:var(--panel-header);border:1px solid var(--border);
+  border-radius:10px;padding:12px;cursor:pointer;transition:all var(--transition);
+}
+.mkt-card:hover{border-color:var(--border-strong);transform:translateY(-1px);}
+.mkt-name{font-size:0.72rem;color:var(--text-secondary);margin-bottom:4px;}
+.mkt-val{font-family:'JetBrains Mono',monospace;font-size:1.1rem;font-weight:600;}
+.mkt-chg{font-family:'JetBrains Mono',monospace;font-size:0.72rem;margin-top:3px;}
+.mkt-chg.up{color:#00e676;}
+.mkt-chg.dn{color:var(--accent-red);}
+.mkt-spark{height:28px;margin-top:8px;}
+.mkt-spark svg{width:100%;height:100%;}
+.mkt-full-list{padding:0 16px 14px;}
+.mkt-row{
+  display:flex;align-items:center;padding:8px 0;
+  border-bottom:1px solid var(--border);gap:10px;
+}
+.mkt-row:last-child{border-bottom:none;}
+.mkt-row-sym{font-family:'JetBrains Mono',monospace;font-size:0.78rem;font-weight:600;width:60px;flex-shrink:0;}
+.mkt-row-name{flex:1;font-size:0.78rem;color:var(--text-secondary);}
+.mkt-row-price{font-family:'JetBrains Mono',monospace;font-size:0.82rem;font-weight:600;text-align:right;}
+.mkt-row-chg{font-family:'JetBrains Mono',monospace;font-size:0.75rem;width:60px;text-align:right;flex-shrink:0;}
+
+/* ═══════ THREAT FEED ═══════ */
+.threat-list{display:flex;flex-direction:column;}
+.threat-item{
+  display:flex;gap:12px;align-items:flex-start;
+  padding:12px 16px;border-bottom:1px solid var(--border);
+  cursor:pointer;transition:background var(--transition);
+}
+.threat-item:last-child{border-bottom:none;}
+.threat-item:hover{background:var(--panel-header);}
+.threat-sev{
+  width:28px;height:28px;border-radius:6px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;flex-shrink:0;margin-top:2px;
+}
+.sev-c{background:rgba(255,68,68,0.18);color:var(--accent-red);border:1px solid rgba(255,68,68,0.3);}
+.sev-h{background:rgba(255,140,66,0.18);color:var(--accent-orange);border:1px solid rgba(255,140,66,0.3);}
+.sev-m{background:rgba(245,197,24,0.18);color:var(--accent-gold);border:1px solid rgba(245,197,24,0.3);}
+.sev-l{background:rgba(0,230,118,0.12);color:#00e676;border:1px solid rgba(0,230,118,0.2);}
+.threat-body{flex:1;}
+.threat-title{font-size:0.82rem;font-weight:500;margin-bottom:3px;}
+.threat-detail{font-size:0.72rem;color:var(--text-secondary);line-height:1.4;}
+.threat-time{font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:var(--text-secondary);margin-top:4px;}
+
+/* ═══════ WEATHER ═══════ */
+.wx-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:14px 16px;}
+.wx-card{
+  background:var(--panel-header);border:1px solid var(--border);
+  border-radius:10px;padding:12px;text-align:center;
+}
+.wx-city{font-size:0.7rem;color:var(--text-secondary);margin-bottom:6px;font-weight:500;}
+.wx-ico{font-size:28px;line-height:1;}
+.wx-temp{font-family:'JetBrains Mono',monospace;font-size:1.2rem;font-weight:700;margin:6px 0;}
+.wx-cond{font-size:0.68rem;color:var(--text-secondary);}
+.wx-extra{font-size:0.65rem;color:var(--text-secondary);margin-top:4px;}
+
+/* ═══════ SOCIAL INTEL ═══════ */
+.social-list{display:flex;flex-direction:column;}
+.social-item{
+  padding:12px 16px;border-bottom:1px solid var(--border);
+  cursor:pointer;transition:background var(--transition);
+}
+.social-item:last-child{border-bottom:none;}
+.social-item:hover{background:var(--panel-header);}
+.si-header{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+.si-platform{font-size:16px;}
+.si-user{font-size:0.78rem;font-weight:600;}
+.si-handle{font-size:0.68rem;color:var(--text-secondary);}
+.si-verified{color:var(--accent-blue);font-size:12px;}
+.si-text{font-size:0.8rem;line-height:1.4;margin-bottom:6px;}
+.si-stats{display:flex;gap:14px;}
+.si-stat{font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--text-secondary);}
+
+/* ═══════ SATELLITE PANEL ═══════ */
+.sat-wrap{
+  position:relative;min-height:280px;background:#030d06;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.sat-overlay-content{text-align:center;z-index:2;position:relative;}
+.sat-orbit{
+  position:absolute;border-radius:50%;border:1px solid rgba(0,178,90,0.15);
+  animation:orbit-rot 20s linear infinite;
+}
+.sat-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--primary-light);
+  position:absolute;top:-3px;left:50%;margin-left:-3px;
+  box-shadow:0 0 6px var(--primary-light);
+}
+@keyframes orbit-rot{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+.sat-globe-center{font-size:60px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);}
+
+/* ═══════ CRYPTO PANEL ═══════ */
+.crypto-table{width:100%;border-collapse:collapse;}
+.crypto-table th{
+  font-family:'JetBrains Mono',monospace;font-size:0.62rem;
+  color:var(--text-secondary);text-transform:uppercase;letter-spacing:1px;
+  padding:8px 14px;text-align:left;border-bottom:1px solid var(--border);
+}
+.crypto-table td{
+  padding:10px 14px;border-bottom:1px solid var(--border);font-size:0.8rem;
+}
+.crypto-table tr:last-child td{border-bottom:none;}
+.crypto-table tr:hover td{background:var(--panel-header);}
+.ct-coin{display:flex;align-items:center;gap:8px;}
+.ct-ico{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;background:var(--panel-header);}
+.ct-name{font-weight:600;font-size:0.82rem;}
+.ct-sym{font-size:0.68rem;color:var(--text-secondary);}
+
+/* ═══════ ALERT FEED ═══════ */
+.alert-list{display:flex;flex-direction:column;gap:8px;padding:14px 16px;}
+.alert-item{
+  background:var(--panel-header);border-radius:10px;padding:12px 14px;
+  border-left:3px solid var(--border);cursor:pointer;transition:all var(--transition);
+}
+.alert-item:hover{border-left-color:var(--primary-light);}
+.alert-item.crit{border-left-color:var(--accent-red);}
+.alert-item.warn{border-left-color:var(--accent-gold);}
+.alert-item.info{border-left-color:var(--accent-blue);}
+.alert-hd{display:flex;align-items:center;gap:8px;margin-bottom:4px;}
+.alert-ico{font-size:14px;}
+.alert-ttl{font-size:0.82rem;font-weight:600;flex:1;}
+.alert-time{font-family:'JetBrains Mono',monospace;font-size:0.63rem;color:var(--text-secondary);}
+.alert-txt{font-size:0.76rem;color:var(--text-secondary);line-height:1.4;}
+
+/* ═══════ SETTINGS PANEL ═══════ */
+#sp-ov{
+  position:fixed;inset:0;background:rgba(0,0,0,0.5);
+  z-index:800;opacity:0;pointer-events:none;transition:opacity 0.3s;
+  backdrop-filter:blur(3px);
+}
+#sp-ov.vis{opacity:1;pointer-events:all;}
+#sp{
+  position:fixed;right:-360px;top:0;bottom:0;width:340px;
+  background:var(--panel-bg);border-left:1px solid var(--border);
+  z-index:850;transition:right 0.35s cubic-bezier(0.4,0,0.2,1);
+  overflow-y:auto;
+}
+#sp.open{right:0;}
+.sp-hd{
+  padding:18px 20px;background:var(--panel-header);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:1;
+}
+.sp-hd h3{font-size:1rem;font-weight:600;}
+.sp-cls{
+  background:none;border:1px solid var(--border);border-radius:6px;
+  color:var(--text-secondary);width:30px;height:30px;
+  display:flex;align-items:center;justify-content:center;
+  transition:all var(--transition);
+}
+.sp-cls:hover{border-color:var(--accent-red);color:var(--accent-red);}
+.sp-body{padding:18px 20px;}
+.sp-sec{margin-bottom:22px;}
+.sp-sec h4{font-size:0.8rem;font-weight:600;color:var(--text-secondary);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;}
+.sp-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 0;border-bottom:1px solid var(--border);
+}
+.sp-row:last-child{border-bottom:none;}
+.sp-lbl{font-size:0.82rem;font-weight:500;}
+.sp-sub{font-size:0.7rem;color:var(--text-secondary);margin-top:1px;}
+.sp-toggle{
+  width:42px;height:22px;border-radius:11px;
+  background:var(--panel-header);border:none;
+  position:relative;cursor:pointer;transition:background 0.3s;flex-shrink:0;
+}
+.sp-toggle.on{background:var(--primary-light);}
+.sp-toggle::after{
+  content:'';position:absolute;top:2px;left:2px;
+  width:18px;height:18px;border-radius:50%;
+  background:#fff;transition:left 0.3s;box-shadow:0 1px 4px rgba(0,0,0,0.3);
+}
+.sp-toggle.on::after{left:22px;}
+.theme-selector{display:flex;gap:8px;margin-top:10px;}
+.theme-option{
+  width:34px;height:34px;border-radius:50%;
+  border:2px solid var(--border);cursor:pointer;
+  transition:all 0.2s;position:relative;
+}
+.theme-option:hover{transform:scale(1.15);}
+.theme-option.active{border-color:#fff;box-shadow:0 0 0 3px var(--primary-light);}
+.theme-option[data-theme="green"]{background:radial-gradient(circle,#00b35a,#006233);}
+.theme-option[data-theme="dark"]{background:radial-gradient(circle,#5eb8ff,#0a84ff);}
+.theme-option[data-theme="light"]{background:radial-gradient(circle,#4098ff,#0070e0);}
+.theme-option[data-theme="cyber"]{background:radial-gradient(circle,#c45eff,#a020f0);}
+.sp-select{
+  background:var(--panel-header);border:1px solid var(--border);
+  color:var(--text);border-radius:6px;padding:5px 10px;
+  font-size:0.78rem;font-family:inherit;cursor:pointer;
+}
+.sp-select:focus{outline:none;border-color:var(--primary-light);}
+.sp-range{
+  width:120px;accent-color:var(--primary-light);
+}
+
+/* ═══════ AUTH MODAL ═══════ */
+.modal-bg{
+  position:fixed;inset:0;background:rgba(0,0,0,0.6);
+  z-index:950;display:none;align-items:center;justify-content:center;
+  backdrop-filter:blur(6px);
+}
+.modal-bg.open{display:flex;}
+.modal{
+  background:var(--panel-bg);border:1px solid var(--border-strong);
+  border-radius:18px;padding:32px 28px;width:360px;max-width:90vw;
+  position:relative;box-shadow:0 20px 80px rgba(0,0,0,0.5);
+  animation:modalIn 0.3s ease;
+}
+@keyframes modalIn{from{opacity:0;transform:scale(0.92) translateY(20px);}to{opacity:1;transform:none;}}
+.m-cls{
+  position:absolute;top:12px;right:12px;
+  background:none;border:1px solid var(--border);
+  border-radius:6px;color:var(--text-secondary);
+  width:28px;height:28px;transition:all var(--transition);
+}
+.m-cls:hover{border-color:var(--accent-red);color:var(--accent-red);}
+.modal h2{font-size:1.3rem;font-weight:700;margin-bottom:4px;text-align:center;}
+.modal-sub{text-align:center;color:var(--text-secondary);font-size:0.82rem;margin-bottom:22px;}
+.auth-btn{
+  width:100%;display:flex;align-items:center;justify-content:center;gap:10px;
+  background:rgba(255,255,255,0.06);
+  border:1px solid var(--border-strong);border-radius:10px;
+  color:var(--text);padding:12px;font-size:0.88rem;font-weight:500;
+  margin-bottom:10px;transition:all var(--transition);
+}
+.auth-btn:hover{background:rgba(255,255,255,0.1);transform:translateY(-1px);}
+.modal-divider{text-align:center;color:var(--text-secondary);font-size:0.75rem;margin:12px 0;position:relative;}
+.modal-divider::before,.modal-divider::after{
+  content:'';position:absolute;top:50%;width:40%;height:1px;background:var(--border);
+}
+.modal-divider::before{left:0;}
+.modal-divider::after{right:0;}
+.modal-email-form{display:flex;flex-direction:column;gap:8px;}
+.modal-input{
+  background:var(--panel-header);border:1px solid var(--border);
+  border-radius:8px;padding:10px 14px;color:var(--text);
+  font-size:0.85rem;font-family:inherit;transition:all var(--transition);
+}
+.modal-input:focus{outline:none;border-color:var(--primary-light);}
+.modal-input::placeholder{color:var(--text-secondary);}
+.modal-submit{
+  background:var(--primary);border:none;color:#fff;
+  border-radius:8px;padding:11px;font-size:0.88rem;font-weight:600;
+  transition:all var(--transition);
+}
+.modal-submit:hover{background:var(--primary-light);box-shadow:0 0 20px var(--glow);}
+
+/* ═══════ CONTACT FLOAT ═══════ */
+#cf{
+  position:fixed;bottom:24px;left:24px;z-index:700;
+  display:flex;flex-direction:column;align-items:flex-start;gap:8px;
+}
+.cf-btn{
+  width:48px;height:48px;border-radius:50%;border:none;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;box-shadow:0 4px 18px rgba(0,0,0,0.3);
+  transition:all var(--transition);cursor:pointer;
+}
+.cf-btn:hover{transform:scale(1.08);}
+.cf-main{background:var(--primary);color:#fff;}
+.cf-chat{background:#25d366;}
+.cf-mail{background:var(--accent-blue);}
+.cf-label{
+  position:absolute;left:56px;top:50%;transform:translateY(-50%);
+  background:rgba(0,0,0,0.8);color:#fff;
+  font-size:0.72rem;padding:4px 10px;border-radius:6px;
+  white-space:nowrap;pointer-events:none;opacity:0;transition:opacity 0.2s;
+}
+.cf-wrap{position:relative;}
+.cf-wrap:hover .cf-label{opacity:1;}
+
+/* ═══════ AI PANEL ═══════ */
+#af{
+  position:fixed;bottom:24px;right:24px;z-index:700;
+}
+.af-btn{
+  width:52px;height:52px;border-radius:50%;border:none;
+  background:linear-gradient(135deg,var(--primary),var(--primary-light));
+  color:#fff;font-size:22px;
+  box-shadow:0 4px 20px var(--glow);
+  transition:all var(--transition);
+  display:flex;align-items:center;justify-content:center;
+}
+.af-btn:hover{transform:scale(1.1);box-shadow:0 6px 28px var(--glow);}
+#ai-panel{
+  position:fixed;bottom:90px;right:24px;
+  width:320px;background:var(--panel-bg);
+  border:1px solid var(--border-strong);border-radius:16px;
+  box-shadow:0 10px 40px rgba(0,0,0,0.4);
+  z-index:700;
+  transform:scale(0.9) translateY(20px);
+  opacity:0;pointer-events:none;
+  transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
+  overflow:hidden;
+}
+#ai-panel.open{transform:none;opacity:1;pointer-events:all;}
+.ai-hd{
+  padding:14px 16px;background:var(--panel-header);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:10px;
+}
+.ai-hd-ico{
+  width:32px;height:32px;border-radius:50%;
+  background:linear-gradient(135deg,var(--primary),var(--primary-light));
+  display:flex;align-items:center;justify-content:center;font-size:16px;
+}
+.ai-hd-txt{flex:1;}
+.ai-hd-txt h4{font-size:0.85rem;font-weight:600;}
+.ai-hd-txt p{font-size:0.65rem;color:var(--text-secondary);}
+.ai-status{width:8px;height:8px;border-radius:50%;background:#00e676;animation:pulse 2s infinite;}
+.ai-msgs{height:200px;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px;}
+.ai-msg{
+  max-width:85%;padding:8px 12px;border-radius:12px;font-size:0.78rem;line-height:1.4;
+}
+.ai-msg.bot{background:var(--panel-header);border-radius:12px 12px 12px 3px;align-self:flex-start;}
+.ai-msg.user{background:var(--primary);color:#fff;border-radius:12px 12px 3px 12px;align-self:flex-end;}
+.ai-footer{display:flex;gap:8px;padding:10px 12px;border-top:1px solid var(--border);}
+.ai-input{
+  flex:1;background:var(--panel-header);border:1px solid var(--border);
+  border-radius:20px;padding:7px 14px;color:var(--text);
+  font-size:0.78rem;font-family:inherit;
+}
+.ai-input:focus{outline:none;border-color:var(--primary-light);}
+.ai-send{
+  width:34px;height:34px;border-radius:50%;border:none;
+  background:var(--primary);color:#fff;font-size:14px;
+  display:flex;align-items:center;justify-content:center;
+  transition:all var(--transition);flex-shrink:0;
+}
+.ai-send:hover{background:var(--primary-light);}
+.ai-suggestions{display:flex;gap:6px;flex-wrap:wrap;padding:8px 12px;border-top:1px solid var(--border);}
+.ai-sug{
+  background:var(--panel-header);border:1px solid var(--border);
+  border-radius:12px;color:var(--text-secondary);
+  padding:4px 10px;font-size:0.68rem;cursor:pointer;
+  transition:all var(--transition);
+}
+.ai-sug:hover{border-color:var(--primary-light);color:var(--primary-light);}
+
+/* ═══════ STT BUTTON ═══════ */
+#stt{
+  position:fixed;bottom:88px;left:50%;transform:translateX(-50%);
+  background:var(--panel-bg);border:1px solid var(--border);
+  color:var(--text-secondary);border-radius:20px;
+  padding:7px 18px;font-size:0.75rem;
+  display:none;align-items:center;gap:6px;
+  transition:all var(--transition);z-index:600;
+  box-shadow:0 4px 18px var(--shadow);
+}
+#stt.show{display:flex;}
+#stt:hover{border-color:var(--primary-light);color:var(--text);}
+
+/* ═══════ TOAST ═══════ */
+#toast-c{
+  position:fixed;top:70px;right:20px;z-index:990;
+  display:flex;flex-direction:column;gap:8px;
+}
+.toast{
+  background:var(--panel-bg);border:1px solid var(--border-strong);
+  border-radius:10px;padding:12px 16px;min-width:240px;
+  box-shadow:0 8px 30px rgba(0,0,0,0.3);
+  display:flex;align-items:center;gap:10px;
+  animation:toastIn 0.3s ease,toastOut 0.3s ease 3.7s forwards;
+  font-size:0.82rem;
+}
+@keyframes toastIn{from{opacity:0;transform:translateX(20px);}to{opacity:1;transform:none;}}
+@keyframes toastOut{from{opacity:1;transform:none;}to{opacity:0;transform:translateX(20px);}}
+.toast-ico{font-size:16px;flex-shrink:0;}
+
+/* ═══════ FOOTER ═══════ */
+footer{
+  background:var(--panel-bg);
+  border-top:1px solid var(--border);
+  padding:40px 20px 20px;
+  margin-top:40px;
+}
+.ft-i{
+  max-width:1700px;margin:0 auto;
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;
+  margin-bottom:30px;
+}
+.ft-brand h3{font-size:1.1rem;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.ft-brand p{font-size:0.78rem;color:var(--text-secondary);line-height:1.6;}
+.ft-col h4{font-size:0.78rem;font-weight:600;color:var(--text-secondary);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:14px;}
+.ft-col a{display:block;font-size:0.8rem;color:var(--text-secondary);margin-bottom:8px;transition:color var(--transition);}
+.ft-col a:hover{color:var(--primary-light);}
+.ft-bot{
+  max-width:1700px;margin:0 auto;
+  border-top:1px solid var(--border);padding-top:18px;
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:0.72rem;color:var(--text-secondary);flex-wrap:wrap;gap:10px;
+}
+.ft-bot div{display:flex;gap:14px;}
+.ft-bot a{color:var(--text-secondary);transition:color var(--transition);}
+.ft-bot a:hover{color:var(--primary-light);}
+
+/* ═══════ RESPONSIVE ═══════ */
+@media(max-width:1200px){
+  .hero-stats{grid-template-columns:repeat(3,1fr);}
+  .panels-grid{grid-template-columns:repeat(2,1fr);}
+  .panel.wide{grid-column:span 2;}
+  .panel.full{grid-column:span 2;}
+  .ft-i{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:900px){
+  .hero-stats{grid-template-columns:repeat(2,1fr);}
+  .panels-grid{grid-template-columns:1fr;}
+  .panel.wide,.panel.full{grid-column:span 1;}
+  #bk-sb{display:none;}
+  .nav-links{display:none;}
+  .ft-i{grid-template-columns:1fr;}
+  .mkt-grid{grid-template-columns:1fr 1fr;}
+  .wx-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:600px){
+  .hero-stats{grid-template-columns:1fr 1fr;}
+  .hsc-val{font-size:1.3rem;}
+  .n-search{max-width:160px;}
+  #ai-panel{width:calc(100vw - 48px);right:24px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════ LAUNCHER ═══════ -->
+<div id="launcher">
+  <div class="lp-wrap" id="lpts"></div>
+  <div class="l-globe">🌍</div>
+  <h1 class="l-title">FennecGlobe</h1>
+  <p class="l-sub">Global Intelligence Platform</p>
+  <div class="l-bar"><div class="l-fill"></div></div>
+  <p class="l-status" id="l-status">Initializing secure feeds…</p>
+</div>
+
+<!-- ═══════ NAV ═══════ -->
+<nav id="nav" style="display:none;">
+  <div class="nav-i">
+    <button id="bk-tog" onclick="toggleSb()">📌 <span class="bt-lbl">BK</span></button>
+    <a href="#" class="n-logo">
+      <div class="n-logo-ico">🌍</div>
+      <div class="n-logo-txt">
+        <div class="n-logo-name">FennecGlobe</div>
+        <div class="n-logo-tag">Global Intelligence</div>
+      </div>
+    </a>
+    <div class="n-search">
+      <span class="n-search-ico">🔍</span>
+      <input type="text" id="nav-search" placeholder="Search countries, events, markets…" oninput="handleSearch(this.value)" autocomplete="off">
+    </div>
+    <div class="nav-links">
+      <button class="nl active" onclick="scrollToSection('news-section')"><span class="dot"></span> Live</button>
+      <button class="nl" onclick="scrollToSection('map-section')">🗺️ Map</button>
+      <button class="nl" onclick="scrollToSection('markets-section')">📈 Markets</button>
+      <button class="nl" onclick="scrollToSection('threats-section')">🔴 Threats</button>
+      <button class="nl" onclick="scrollToSection('weather-section')">🌤️ Weather</button>
+      <button class="nl" onclick="scrollToSection('crypto-section')">₿ Crypto</button>
+      <button class="nl" onclick="scrollToSection('sat-section')">🛰️ Satellite</button>
+    </div>
+    <div class="nav-right">
+      <button class="nav-icon-btn" onclick="showToast('No new notifications','🔔')" title="Notifications">
+        🔔<span class="badge">7</span>
+      </button>
+      <button class="nav-icon-btn" onclick="toggleSp()" title="Settings">⚙️</button>
+      <button class="nav-icon-btn" onclick="showToast('Bookmarks synced','🔖')" title="Bookmarks">🔖</button>
+      <button class="auth-btn-nav" onclick="openAuth()">Sign In</button>
+      <div class="user-avatar" id="user-avatar" onclick="showUserMenu()"></div>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════ BREAKING BAR ═══════ -->
+<div class="breaking-bar" id="bb" style="display:none;">
+  <div class="bb-label">⚡ BREAKING</div>
+  <div class="bb-text" id="bb-text">Emergency security council meeting convened — live coverage continues</div>
+  <button class="bb-close" onclick="document.getElementById('bb').style.display='none'">✕</button>
+</div>
+
+<!-- ═══════ TICKER ═══════ -->
+<div id="ticker-bar" style="display:none;">
+  <div class="tick-label">📊 LIVE</div>
+  <div style="flex:1;overflow:hidden;">
+    <div class="ticker-track" id="ticker-track"></div>
+  </div>
+</div>
+
+<!-- ═══════ LAYOUT ═══════ -->
+<div id="layout" style="display:none;">
+
+  <!-- BOOKMARK SIDEBAR -->
+  <div id="bk-sb">
+    <div class="sb-section">
+      <div class="sb-title">Feeds</div>
+      <div class="sb-item active" onclick="scrollToSection('news-section')">
+        <div class="sb-ico">📰</div>
+        <span class="sb-label">Live News</span>
+        <span class="sb-count red">38</span>
+      </div>
+      <div class="sb-item" onclick="scrollToSection('threats-section')">
+        <div class="sb-ico">🔴</div>
+        <span class="sb-label">Threat Feed</span>
+        <span class="sb-count red">12</span>
+      </div>
+      <div class="sb-item" onclick="scrollToSection('map-section')">
+        <div class="sb-ico">🗺️</div>
+        <span class="sb-label">Global Map</span>
+        <span class="sb-count">Live</span>
+      </div>
+      <div class="sb-item" onclick="scrollToSection('sat-section')">
+        <div class="sb-ico">🛰️</div>
+        <span class="sb-label">Satellite</span>
+        <span class="sb-count">247</span>
+      </div>
+    </div>
+    <div class="sb-section">
+      <div class="sb-title">Markets</div>
+      <div class="sb-item" onclick="scrollToSection('markets-section')">
+        <div class="sb-ico">📈</div>
+        <span class="sb-label">Indices</span>
+        <span class="sb-count">Live</span>
+      </div>
+      <div class="sb-item" onclick="scrollToSection('crypto-section')">
+        <div class="sb-ico">₿</div>
+        <span class="sb-label">Crypto</span>
+        <span class="sb-count">Top 10</span>
+      </div>
+      <div class="sb-item" onclick="showToast('FX rates updating…','💱')">
+        <div class="sb-ico">💱</div>
+        <span class="sb-label">FX Rates</span>
+        <span class="sb-count">Live</span>
+      </div>
+    </div>
+    <div class="sb-section">
+      <div class="sb-title">Monitors</div>
+      <div class="sb-item" onclick="scrollToSection('weather-section')">
+        <div class="sb-ico">🌤️</div>
+        <span class="sb-label">Weather</span>
+        <span class="sb-count">192</span>
+      </div>
+      <div class="sb-item" onclick="scrollToSection('social-section')">
+        <div class="sb-ico">📡</div>
+        <span class="sb-label">Social Intel</span>
+        <span class="sb-count red">Hot</span>
+      </div>
+      <div class="sb-item" onclick="scrollToSection('alerts-section')">
+        <div class="sb-ico">⚠️</div>
+        <span class="sb-label">Alerts</span>
+        <span class="sb-count red">9</span>
+      </div>
+    </div>
+    <div class="sb-section">
+      <div class="sb-title">Saved</div>
+      <div class="sb-item" onclick="showToast('Algeria feed opened','🇩🇿')">
+        <div class="sb-ico">🇩🇿</div>
+        <span class="sb-label">Algeria</span>
+        <span class="sb-count">Saved</span>
+      </div>
+      <div class="sb-item" onclick="showToast('MENA region feed opened','🌍')">
+        <div class="sb-ico">🌍</div>
+        <span class="sb-label">MENA Region</span>
+        <span class="sb-count">Saved</span>
+      </div>
+      <button class="sb-add-btn" onclick="showToast('Bookmark feature requires sign-in','🔖')">+ Add Bookmark</button>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main id="main">
+
+    <!-- HERO STATS -->
+    <div class="hero-stats">
+      <div class="hs-card">
+        <div class="hsc-ico">🔴</div>
+        <div class="hsc-label">Active Conflicts</div>
+        <div class="hsc-val" id="stat-conflicts">38</div>
+        <div class="hsc-sub"><span class="up">▲ 2</span> vs yesterday</div>
+      </div>
+      <div class="hs-card">
+        <div class="hsc-ico">📡</div>
+        <div class="hsc-label">Live Feeds</div>
+        <div class="hsc-val" id="stat-feeds">247</div>
+        <div class="hsc-sub"><span class="up">●</span> All online</div>
+      </div>
+      <div class="hs-card">
+        <div class="hsc-ico">📰</div>
+        <div class="hsc-label">News Today</div>
+        <div class="hsc-val" id="stat-news">1,842</div>
+        <div class="hsc-sub"><span class="up">▲ 18%</span> above avg</div>
+      </div>
+      <div class="hs-card">
+        <div class="hsc-ico">⚠️</div>
+        <div class="hsc-label">Active Alerts</div>
+        <div class="hsc-val" id="stat-alerts">9</div>
+        <div class="hsc-sub"><span class="dn">▼ 3</span> resolved today</div>
+      </div>
+      <div class="hs-card">
+        <div class="hsc-ico">🌐</div>
+        <div class="hsc-label">Countries Monitored</div>
+        <div class="hsc-val">192</div>
+        <div class="hsc-sub"><span class="up">100%</span> coverage</div>
+      </div>
+    </div>
+
+    <!-- PANELS GRID -->
+    <div class="panels-grid">
+
+      <!-- MAP PANEL -->
+      <div class="panel wide" id="map-section">
+        <div class="ph">
+          <span class="ph-ico">🗺️</span>
+          <span class="ph-title">Global Event Map</span>
+          <span class="ph-badge red">38 ALERTS</span>
+          <div class="ph-controls">
+            <button class="ph-btn" onclick="showToast('Zooming to conflict zones…','🔍')">🔍 Zoom</button>
+            <button class="ph-btn" onclick="showToast('Downloading map data…','💾')">💾 Export</button>
+          </div>
+        </div>
+        <div class="pb np">
+          <div class="map-wrap" id="map-wrap">
+            <!-- Hotspots -->
+            <div class="hs hs-r" style="top:36%;left:61%"><div class="hs-tip">Middle East — Active Conflict</div></div>
+            <div class="hs hs-r" style="top:40%;left:58%"><div class="hs-tip">Red Sea — Shipping Disruption</div></div>
+            <div class="hs hs-r" style="top:52%;left:42%"><div class="hs-tip">Sahel — Active Conflict</div></div>
+            <div class="hs hs-r" style="top:32%;left:53%"><div class="hs-tip">Eastern Europe — Ongoing Conflict</div></div>
+            <div class="hs hs-r" style="top:55%;left:65%"><div class="hs-tip">Horn of Africa — Instability</div></div>
+            <div class="hs hs-o" style="top:44%;left:78%"><div class="hs-tip">Taiwan Strait — Elevated Tension</div></div>
+            <div class="hs hs-o" style="top:28%;left:63%"><div class="hs-tip">Black Sea — Naval Activity</div></div>
+            <div class="hs hs-o" style="top:38%;left:70%"><div class="hs-tip">Central Asia — Unrest</div></div>
+            <div class="hs hs-g" style="top:41%;left:40%"><div class="hs-tip">Algeria 🇩🇿 — Stable</div></div>
+            <div class="hs hs-g" style="top:27%;left:26%"><div class="hs-tip">Western Europe — Stable</div></div>
+            <div class="hs hs-g" style="top:23%;left:15%"><div class="hs-tip">North America — Stable</div></div>
+            <div class="hs hs-g" style="top:57%;left:80%"><div class="hs-tip">SE Asia — Stable</div></div>
+            <div class="hs hs-g" style="top:64%;left:22%"><div class="hs-tip">South America — Stable</div></div>
+            <div class="hs hs-r" style="top:48%;left:30%"><div class="hs-tip">Central Africa — Wildfires / Conflict</div></div>
+            <div class="map-overlay">
+              <div class="map-globe-big">🌍</div>
+              <div class="map-cta">
+                <h3>Real-Time Global Event Map</h3>
+                <p>Interactive satellite + conflict + weather layers across all 192 monitored nations</p>
+              </div>
+              <button onclick="showToast('Launching interactive MapLibre GL map…','🗺️')">🗺️ Launch Full Map</button>
+            </div>
+            <div class="map-legend">
+              <div class="ml-item"><div class="ml-dot" style="background:#ff4444"></div> Conflict</div>
+              <div class="ml-item"><div class="ml-dot" style="background:#ff8c42"></div> Tension</div>
+              <div class="ml-item"><div class="ml-dot" style="background:#00e676"></div> Stable</div>
+            </div>
+          </div>
+          <div class="map-layers">
+            <button class="layer-btn active" onclick="toggleLayer(this,'Conflicts')">🔴 Conflicts</button>
+            <button class="layer-btn" onclick="toggleLayer(this,'Weather')">🌩️ Weather</button>
+            <button class="layer-btn" onclick="toggleLayer(this,'Shipping')">🚢 Shipping</button>
+            <button class="layer-btn" onclick="toggleLayer(this,'Flights')">✈️ Flights</button>
+            <button class="layer-btn" onclick="toggleLayer(this,'Military')">🪖 Military</button>
+            <button class="layer-btn" onclick="toggleLayer(this,'Economics')">📊 Economics</button>
+            <button class="layer-btn" onclick="toggleLayer(this,'Disease')">🦠 Disease</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- LIVE NEWS -->
+      <div class="panel" id="news-section">
+        <div class="ph">
+          <span class="ph-ico">📰</span>
+          <span class="ph-title">Live World News</span>
+          <span class="ph-badge red">LIVE</span>
+          <div class="ph-controls">
+            <button class="ph-btn" onclick="showToast('Refreshing news feeds…','🔄')">🔄</button>
+          </div>
+        </div>
+        <div class="pb np">
+          <div class="news-list" id="news-list"></div>
+          <button class="news-load-more" onclick="loadMoreNews()">Load more stories →</button>
+        </div>
+      </div>
+
+      <!-- MARKETS -->
+      <div class="panel wide" id="markets-section">
+        <div class="ph">
+          <span class="ph-ico">📈</span>
+          <span class="ph-title">Global Markets</span>
+          <span class="ph-badge green">OPEN</span>
+          <div class="ph-controls">
+            <button class="ph-btn" onclick="setMktView('cards')" id="mkt-view-cards">📊 Cards</button>
+            <button class="ph-btn" onclick="setMktView('table')" id="mkt-view-table">📋 Table</button>
+          </div>
+        </div>
+        <div class="pb np">
+          <div class="mkt-grid" id="mkt-cards">
+            <!-- JS generated -->
+          </div>
+          <div class="mkt-full-list" id="mkt-table" style="display:none;">
+            <!-- JS generated -->
+          </div>
+        </div>
+      </div>
+
+      <!-- THREAT FEED -->
+      <div class="panel" id="threats-section">
+        <div class="ph">
+          <span class="ph-ico">🔴</span>
+          <span class="ph-title">Threat Intelligence</span>
+          <span class="ph-badge red">12 ACTIVE</span>
+        </div>
+        <div class="pb np">
+          <div class="threat-list" id="threat-list"></div>
+        </div>
+      </div>
+
+      <!-- WEATHER -->
+      <div class="panel wide" id="weather-section">
+        <div class="ph">
+          <span class="ph-ico">🌤️</span>
+          <span class="ph-title">Global Weather Monitor</span>
+          <span class="ph-badge blue">192 Cities</span>
+          <div class="ph-controls">
+            <button class="ph-btn" onclick="toggleWxUnit()">°C / °F</button>
+          </div>
+        </div>
+        <div class="pb np">
+          <div class="wx-grid" id="wx-grid"></div>
+        </div>
+      </div>
+
+      <!-- SOCIAL INTEL -->
+      <div class="panel" id="social-section">
+        <div class="ph">
+          <span class="ph-ico">📡</span>
+          <span class="ph-title">Social Intelligence</span>
+          <span class="ph-badge gold">TRENDING</span>
+        </div>
+        <div class="pb np">
+          <div class="social-list" id="social-list"></div>
+        </div>
+      </div>
+
+      <!-- CRYPTO -->
+      <div class="panel" id="crypto-section">
+        <div class="ph">
+          <span class="ph-ico">₿</span>
+          <span class="ph-title">Cryptocurrency</span>
+          <span class="ph-badge gold">Top 8</span>
+          <div class="ph-controls">
+            <button class="ph-btn" onclick="showToast('Opening full crypto dashboard…','₿')">Full View</button>
+          </div>
+        </div>
+        <div class="pb np">
+          <table class="crypto-table" id="crypto-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Asset</th>
+                <th>Price</th>
+                <th>24h %</th>
+                <th>Mkt Cap</th>
+              </tr>
+            </thead>
+            <tbody id="crypto-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SATELLITE -->
+      <div class="panel" id="sat-section">
+        <div class="ph">
+          <span class="ph-ico">🛰️</span>
+          <span class="ph-title">Satellite Monitor</span>
+          <span class="ph-badge blue">247 SATS</span>
+        </div>
+        <div class="pb np">
+          <div class="sat-wrap" id="sat-wrap">
+            <div class="sat-globe-center">🌍</div>
+            <!-- Orbit rings -->
+            <div class="sat-orbit" id="orbit1" style="width:200px;height:200px;top:50%;left:50%;margin:-100px 0 0 -100px;animation-duration:15s;">
+              <div class="sat-dot"></div>
+            </div>
+            <div class="sat-orbit" id="orbit2" style="width:280px;height:280px;top:50%;left:50%;margin:-140px 0 0 -140px;animation-duration:22s;animation-direction:reverse;">
+              <div class="sat-dot"></div>
+            </div>
+            <div class="sat-orbit" id="orbit3" style="width:360px;height:360px;top:50%;left:50%;margin:-180px 0 0 -180px;animation-duration:35s;">
+              <div class="sat-dot"></div>
+            </div>
+            <div class="sat-overlay-content">
+              <div style="color:rgba(255,255,255,0.7);font-size:0.78rem;margin-top:10px;">247 active satellites tracked</div>
+              <button onclick="showToast('Opening full satellite tracking dashboard…','🛰️')" style="background:var(--primary);border:none;color:#fff;padding:8px 18px;border-radius:20px;font-size:0.78rem;font-weight:600;margin-top:10px;cursor:pointer;">
+                🛰️ Full Tracker
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ALERTS -->
+      <div class="panel wide" id="alerts-section">
+        <div class="ph">
+          <span class="ph-ico">⚠️</span>
+          <span class="ph-title">Active Alerts</span>
+          <span class="ph-badge red">9 ACTIVE</span>
+          <div class="ph-controls">
+            <button class="ph-btn" onclick="showToast('All alerts acknowledged','✅')">Acknowledge All</button>
+          </div>
+        </div>
+        <div class="pb">
+          <div class="alert-list" id="alert-list"></div>
+        </div>
+      </div>
+
+    </div><!-- /panels-grid -->
+  </main>
+</div><!-- /layout -->
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer id="footer-el" style="display:none;">
+  <div class="ft-i">
+    <div class="ft-brand">
+      <h3>🌍 FennecGlobe</h3>
+      <p>Unified global intelligence platform — 192 countries, 247 live channels, real-time AI analysis, satellite monitoring and market data. Powered by FennecIntel Engine v4.2.</p>
+      <div style="margin-top:14px;display:flex;gap:10px;">
+        <span style="font-size:0.7rem;background:rgba(0,178,90,0.1);border:1px solid var(--border);border-radius:4px;padding:3px 8px;color:var(--text-secondary);">🔒 SOC2</span>
+        <span style="font-size:0.7rem;background:rgba(0,178,90,0.1);border:1px solid var(--border);border-radius:4px;padding:3px 8px;color:var(--text-secondary);">🛡️ ISO 27001</span>
+        <span style="font-size:0.7rem;background:rgba(0,178,90,0.1);border:1px solid var(--border);border-radius:4px;padding:3px 8px;color:var(--text-secondary);">✅ GDPR</span>
+      </div>
+    </div>
+    <div class="ft-col">
+      <h4>Platform</h4>
+      <a href="#" onclick="scrollToSection('news-section');return false;">Live News</a>
+      <a href="#" onclick="scrollToSection('map-section');return false;">Global Map</a>
+      <a href="#" onclick="scrollToSection('markets-section');return false;">Markets</a>
+      <a href="#" onclick="scrollToSection('threats-section');return false;">Threat Feed</a>
+      <a href="#" onclick="scrollToSection('sat-section');return false;">Satellite</a>
+      <a href="#" onclick="scrollToSection('crypto-section');return false;">Crypto</a>
+    </div>
+    <div class="ft-col">
+      <h4>Company</h4>
+      <a href="#" onclick="showToast('About page coming soon','ℹ️');return false;">About</a>
+      <a href="#" onclick="showToast('Blog coming soon','📝');return false;">Blog</a>
+      <a href="#" onclick="showToast('Press kit available','📰');return false;">Press</a>
+      <a href="#" onclick="showToast('We are hiring!','🚀');return false;">Careers</a>
+      <a href="#" onclick="showToast('API docs opening…','🔌');return false;">API Docs</a>
+    </div>
+    <div class="ft-col">
+      <h4>Legal</h4>
+      <a href="#" onclick="showToast('Privacy Policy opening…','🔒');return false;">Privacy Policy</a>
+      <a href="#" onclick="showToast('Terms of Service opening…','📋');return false;">Terms of Service</a>
+      <a href="#" onclick="showToast('Cookie Policy opening…','🍪');return false;">Cookie Policy</a>
+      <a href="#" onclick="showToast('Data Policy opening…','📊');return false;">Data Policy</a>
+      <a href="#" onclick="showToast('Contact: hello@fennecglobe.com','📧');return false;">Contact</a>
+    </div>
+  </div>
+  <div class="ft-bot">
+    <span>© 2026 FennecGlobe. All rights reserved. | Powered by FennecIntel Engine.</span>
+    <div>
+      <a href="#" onclick="showToast('Privacy Policy','🔒');return false;">Privacy</a>
+      <a href="#" onclick="showToast('Terms of Service','📋');return false;">Terms</a>
+      <a href="#" onclick="showToast('API Documentation','🔌');return false;">API</a>
+      <a href="#" onclick="showToast('Status: All systems operational ✅','🟢');return false;">Status</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════ CONTACT FLOAT ═══════ -->
+<div id="cf" style="display:none;">
+  <div class="cf-wrap">
+    <button class="cf-btn cf-chat" onclick="showToast('Opening WhatsApp support…','💬')" title="WhatsApp">💬</button>
+    <div class="cf-label">WhatsApp</div>
+  </div>
+  <div class="cf-wrap">
+    <button class="cf-btn cf-mail" onclick="showToast('Email: support@fennecglobe.com','📧')" title="Email">📧</button>
+    <div class="cf-label">Email</div>
+  </div>
+</div>
+
+<!-- ═══════ AI PANEL ═══════ -->
+<div id="af" style="display:none;">
+  <button class="af-btn" onclick="toggleAi()" title="FennecAI Assistant">🤖</button>
+</div>
+<div id="ai-panel">
+  <div class="ai-hd">
+    <div class="ai-hd-ico">🤖</div>
+    <div class="ai-hd-txt">
+      <h4>FennecAI</h4>
+      <p>Global intelligence assistant</p>
+    </div>
+    <div class="ai-status"></div>
+  </div>
+  <div class="ai-msgs" id="ai-msgs">
+    <div class="ai-msg bot">Hello! I'm FennecAI. Ask me about any global event, country, market, or geopolitical situation. I'm monitoring 192 countries right now.</div>
+  </div>
+  <div class="ai-suggestions">
+    <span class="ai-sug" onclick="aiSend('What are the top 3 current conflicts?')">Top conflicts</span>
+    <span class="ai-sug" onclick="aiSend('Bitcoin price analysis')">BTC analysis</span>
+    <span class="ai-sug" onclick="aiSend('Algeria security situation')">Algeria update</span>
+    <span class="ai-sug" onclick="aiSend('Global market summary')">Markets</span>
+  </div>
+  <div class="ai-footer">
+    <input class="ai-input" id="ai-input" placeholder="Ask about any global topic…" onkeypress="if(event.key==='Enter')aiSendInput()">
+    <button class="ai-send" onclick="aiSendInput()">➤</button>
+  </div>
+</div>
+
+<!-- ═══════ SCROLL TO TOP ═══════ -->
+<button id="stt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Top</button>
+
+<!-- ═══════ TOAST CONTAINER ═══════ -->
+<div id="toast-c"></div>
+
+<!-- ═══════ SETTINGS PANEL ═══════ -->
+<div id="sp-ov" onclick="toggleSp()"></div>
+<div id="sp">
+  <div class="sp-hd">
+    <h3>⚙️ Settings</h3>
+    <button class="sp-cls" onclick="toggleSp()">✕</button>
+  </div>
+  <div class="sp-body">
+    <div class="sp-sec">
+      <h4>🎨 Display</h4>
+      <div class="sp-row">
+        <div><div class="sp-lbl">Theme</div><div class="sp-sub">Color scheme</div></div>
+        <div></div>
+      </div>
+      <div class="theme-selector">
+        <div class="theme-option active" data-theme="green" onclick="setTheme('green')" title="Algerian Green"></div>
+        <div class="theme-option" data-theme="dark" onclick="setTheme('dark')" title="Dark Blue"></div>
+        <div class="theme-option" data-theme="light" onclick="setTheme('light')" title="Light"></div>
+        <div class="theme-option" data-theme="cyber" onclick="setTheme('cyber')" title="Cyber Purple"></div>
+      </div>
+      <div class="sp-row" style="margin-top:12px;">
+        <div><div class="sp-lbl">Dense Mode</div><div class="sp-sub">Compact panel layout</div></div>
+        <button class="sp-toggle" onclick="toggleSetting(this,'dense')" id="tog-dense"></button>
+      </div>
+      <div class="sp-row">
+        <div><div class="sp-lbl">Animations</div><div class="sp-sub">Motion effects</div></div>
+        <button class="sp-toggle on" onclick="toggleSetting(this,'anims')" id="tog-anims"></button>
+      </div>
+      <div class="sp-row">
+        <div><div class="sp-lbl">Language</div><div class="sp-sub">Interface language</div></div>
+        <select class="sp-select" onchange="showToast('Language updated to '+this.options[this.selectedIndex].text,'🌐')">
+          <option>English</option>
+          <option>العربية</option>
+          <option>Français</option>
+          <option>Español</option>
+          <option>Deutsch</option>
+          <option>中文</option>
+        </select>
+      </div>
+    </div>
+    <div class="sp-sec">
+      <h4>🔔 Notifications</h4>
+      <div class="sp-row">
+        <div><div class="sp-lbl">Breaking News</div><div class="sp-sub">Urgent alerts</div></div>
+        <button class="sp-toggle on" onclick="toggleSetting(this,'breaking')"></button>
+      </div>
+      <div class="sp-row">
+        <div><div class="sp-lbl">Market Alerts</div><div class="sp-sub">Price movements >5%</div></div>
+        <button class="sp-toggle on" onclick="toggleSetting(this,'market-alerts')"></button>
+      </div>
+      <div class="sp-row">
+        <div><div class="sp-lbl">Threat Level</div><div class="sp-sub">Security incidents</div></div>
+        <button class="sp-toggle on" onclick="toggleSetting(this,'threat')"></button>
+      </div>
+      <div class="sp-row">
+        <div><div class="sp-lbl">Sound</div><div class="sp-sub">Alert audio</div></div>
+        <button class="sp-toggle" onclick="toggleSetting(this,'sound')"></button>
+      </div>
+    </div>
+    <div class="sp-sec">
+      <h4>📊 Data</h4>
+      <div class="sp-row">
+        <div><div class="sp-lbl">Update Interval</div><div class="sp-sub">Feed refresh rate</div></div>
+        <select class="sp-select" onchange="showToast('Refresh rate set to '+this.value,'⏱️')">
+          <option value="30s">30s</option>
+          <option value="1m" selected>1m</option>
+          <option value="5m">5m</option>
+          <option value="15m">15m</option>
+        </select>
+      </div>
+      <div class="sp-row">
+        <div><div class="sp-lbl">Currency</div><div class="sp-sub">Display currency</div></div>
+        <select class="sp-select" onchange="showToast('Currency set to '+this.value,'💰')">
+          <option>USD</option>
+          <option>EUR</option>
+          <option>GBP</option>
+          <option>DZD</option>
+          <option>SAR</option>
+        </select>
+      </div>
+      <div class="sp-row">
+        <div><div class="sp-lbl">Data Saver</div><div class="sp-sub">Reduce bandwidth</div></div>
+        <button class="sp-toggle" onclick="toggleSetting(this,'datasaver')"></button>
+      </div>
+    </div>
+    <div class="sp-sec">
+      <h4>🔐 Privacy & Security</h4>
+      <div class="sp-row">
+        <div><div class="sp-lbl">Analytics</div><div class="sp-sub">Usage statistics</div></div>
+        <button class="sp-toggle on" onclick="toggleSetting(this,'analytics')"></button>
+      </div>
+      <div class="sp-row">
+        <div><div class="sp-lbl">Personalization</div><div class="sp-sub">Custom recommendations</div></div>
+        <button class="sp-toggle on" onclick="toggleSetting(this,'personalization')"></button>
+      </div>
+      <div style="margin-top:14px;">
+        <button onclick="showToast('Clearing local data…','🗑️');toggleSp();" style="width:100%;background:rgba(255,68,68,0.1);border:1px solid rgba(255,68,68,0.2);color:var(--accent-red);border-radius:8px;padding:10px;font-size:0.8rem;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.background='rgba(255,68,68,0.2)'" onmouseout="this.style.background='rgba(255,68,68,0.1)'">
+          🗑️ Clear All Data
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ AUTH MODAL ═══════ -->
+<div class="modal-bg" id="auth-modal">
+  <div class="modal">
+    <button class="m-cls" onclick="closeAuth()">✕</button>
+    <div style="text-align:center;font-size:36px;margin-bottom:10px;">🌍</div>
+    <h2>FennecGlobe</h2>
+    <p class="modal-sub">Sign in for personalized intelligence feeds, saved bookmarks, and real-time alerts across 192 countries.</p>
+    <button class="auth-btn" onclick="doAuth('Google')">
+      <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+      Continue with Google
+    </button>
+    <button class="auth-btn" onclick="doAuth('Apple')" style="background:rgba(255,255,255,0.06);">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      Continue with Apple
+    </button>
+    <div class="modal-divider">or</div>
+    <div class="modal-email-form">
+      <input class="modal-input" type="email" placeholder="Enter your email" id="auth-email">
+      <input class="modal-input" type="password" placeholder="Password" id="auth-password">
+      <button class="modal-submit" onclick="doAuthEmail()">Sign In</button>
+    </div>
+    <p style="text-align:center;font-size:0.68rem;color:var(--text-secondary);margin-top:14px;">🔒 End-to-end encrypted · SOC2 certified · GDPR compliant</p>
+    <p style="text-align:center;font-size:0.72rem;color:var(--text-secondary);margin-top:8px;">
+      Don't have an account? <a href="#" onclick="showToast('Sign up coming soon!','🚀');closeAuth();" style="color:var(--primary-light);">Sign up free</a>
+    </p>
+  </div>
+</div>
+
+<!-- ═══════ JS ═══════ -->
+<script>
+/* ════════════════════════════════════════
+   FENNECGLOBE — FULL JAVASCRIPT ENGINE
+════════════════════════════════════════ */
+
+// ── STATE ──
+let currentUser = null;
+let sbVisible = true;
+let aiOpen = false;
+let wxCelsius = true;
+let mktView = 'cards';
+let layersActive = new Set(['Conflicts']);
+
+// ── DATA ──
+const NEWS_DATA = [
+  {flag:'🇷🇺🇺🇦',src:'Reuters',title:'Ukraine frontline situation tense as winter operations continue into new phase',time:'2m ago',tags:['r'],tag:'CONFLICT'},
+  {flag:'🌊',src:'Bloomberg',title:'Red Sea shipping disruptions force major rerouting via Cape of Good Hope',time:'5m ago',tags:['o'],tag:'MARITIME'},
+  {flag:'🇮🇱',src:'AP',title:'Diplomatic talks resume as ceasefire framework takes shape under international pressure',time:'8m ago',tags:['b'],tag:'DIPLOMACY'},
+  {flag:'🇩🇿',src:'Algérie Presse',title:'Algeria reaffirms commitment to regional stability at OPEC+ summit in Vienna',time:'12m ago',tags:['g'],tag:'ENERGY'},
+  {flag:'💹',src:'FT',title:'Fed holds rates steady; markets rally as inflation data comes in below forecast',time:'15m ago',tags:['g'],tag:'ECONOMY'},
+  {flag:'🇨🇳',src:'Reuters',title:'China reports record trade surplus; tensions with EU escalate over EV tariffs',time:'19m ago',tags:['o'],tag:'TRADE'},
+  {flag:'🌍',src:'Al Jazeera',title:'African Union emergency summit convened on Sahel security crisis',time:'23m ago',tags:['r'],tag:'SECURITY'},
+  {flag:'🇮🇳',src:'Times of India',title:'India overtakes Japan to become world\'s 4th largest economy by nominal GDP',time:'31m ago',tags:['g'],tag:'ECONOMY'},
+  {flag:'🛰️',src:'SpaceX',title:'Starlink expansion brings satellite internet to 15 new African nations this quarter',time:'38m ago',tags:['b'],tag:'TECH'},
+  {flag:'🌡️',src:'WMO',title:'2025 confirmed as hottest year on record by 0.4°C above previous record',time:'44m ago',tags:['o'],tag:'CLIMATE'},
+];
+
+const THREATS = [
+  {sev:'C',ico:'🔴',title:'Critical: Red Sea Attack on Commercial Vessel',detail:'MV Harmony II struck 40nm off Aden. All crew evacuated. International response underway.',time:'7m ago'},
+  {sev:'H',ico:'🟠',title:'High: Escalating Artillery Exchange Eastern Front',detail:'Significant increase in artillery activity reported across 120km sector. Civilian evacuations ordered.',time:'19m ago'},
+  {sev:'H',ico:'🟠',title:'High: Ransomware Attack on European Energy Infrastructure',detail:'Three grid operators in northern Europe report systems compromised. Emergency protocols active.',time:'34m ago'},
+  {sev:'M',ico:'🟡',title:'Medium: Political Unrest — West African Capital',detail:'Protest movement gaining momentum. Security forces on standby. Embassies on alert.',time:'51m ago'},
+  {sev:'M',ico:'🟡',title:'Medium: Extreme Weather Event — Bay of Bengal',detail:'Cyclonic system developing rapidly. Projected Category 4. Bangladesh coast on alert.',time:'1h 12m ago'},
+  {sev:'L',ico:'🟢',title:'Low: Supply Chain Disruption — Taiwan Strait',detail:'Routine naval exercises causing minor commercial shipping delays. Expected to clear in 48h.',time:'2h ago'},
+];
+
+const MARKETS = [
+  {name:'S&P 500',sym:'SPX',val:'5,891.34',chg:'+0.82%',up:true},
+  {name:'NASDAQ',sym:'NDX',val:'21,044.7',chg:'+1.24%',up:true},
+  {name:'DAX',sym:'DAX',val:'18,714.2',chg:'-0.31%',up:false},
+  {name:'FTSE 100',sym:'UKX',val:'8,246.9',chg:'+0.17%',up:true},
+  {name:'Nikkei 225',sym:'N225',val:'39,118.8',chg:'-0.54%',up:false},
+  {name:'Shanghai',sym:'SSEC',val:'3,421.4',chg:'+0.29%',up:true},
+  {name:'CAC 40',sym:'CAC',val:'7,934.1',chg:'+0.44%',up:true},
+  {name:'Oil (Brent)',sym:'BRENT',val:'$82.47',chg:'-0.88%',up:false},
+];
+
+const CRYPTO = [
+  {rank:1,ico:'₿',name:'Bitcoin',sym:'BTC',price:'$98,240',chg:'+2.34%',up:true,mcap:'$1.94T'},
+  {rank:2,ico:'Ξ',name:'Ethereum',sym:'ETH',price:'$3,841',chg:'+1.87%',up:true,mcap:'$462B'},
+  {rank:3,ico:'◎',name:'Solana',sym:'SOL',price:'$214.50',chg:'+4.21%',up:true,mcap:'$98B'},
+  {rank:4,ico:'B',name:'BNB',sym:'BNB',price:'$688.20',chg:'-0.43%',up:false,mcap:'$97B'},
+  {rank:5,ico:'₮',name:'Tether',sym:'USDT',price:'$1.000',chg:'+0.01%',up:true,mcap:'$143B'},
+  {rank:6,ico:'X',name:'XRP',sym:'XRP',price:'$2.441',chg:'+3.12%',up:true,mcap:'$140B'},
+  {rank:7,ico:'Ł',name:'Cardano',sym:'ADA',price:'$0.891',chg:'-1.22%',up:false,mcap:'$31B'},
+  {rank:8,ico:'A',name:'Avalanche',sym:'AVAX',price:'$38.74',chg:'+5.67%',up:true,mcap:'$16B'},
+];
+
+const WEATHER = [
+  {city:'Algiers',ico:'☀️',temp:22,cond:'Sunny',humidity:'48%',wind:'12 km/h'},
+  {city:'London',ico:'🌧️',temp:9,cond:'Rainy',humidity:'82%',wind:'24 km/h'},
+  {city:'New York',ico:'❄️',temp:-3,cond:'Snow',humidity:'71%',wind:'18 km/h'},
+  {city:'Dubai',ico:'☀️',temp:28,cond:'Clear',humidity:'38%',wind:'8 km/h'},
+  {city:'Beijing',ico:'🌫️',temp:4,cond:'Hazy',humidity:'65%',wind:'14 km/h'},
+  {city:'Moscow',ico:'🌨️',temp:-15,cond:'Heavy Snow',humidity:'88%',wind:'22 km/h'},
+  {city:'Lagos',ico:'⛅',temp:31,cond:'Partly Cloudy',humidity:'78%',wind:'16 km/h'},
+  {city:'Sydney',ico:'🌤️',temp:26,cond:'Fair',humidity:'55%',wind:'20 km/h'},
+];
+
+const SOCIAL = [
+  {platform:'𝕏',user:'Breaking911',handle:'@Breaking911',verified:true,text:'BREAKING: Security Council convening emergency session in response to escalating situation in Black Sea region. Live coverage available.',likes:'48.2K',rts:'22.1K',time:'3m ago'},
+  {platform:'𝕏',user:'GeoEventsFeed',handle:'@GeoEvents',verified:false,text:'New satellite imagery shows significant military movement near the Belarusian-Ukrainian border. Analysis thread below ↓',likes:'12.4K',rts:'8.9K',time:'11m ago'},
+  {platform:'TG',user:'MarketPulse',handle:'@MarketPulse',verified:true,text:'Fed rate decision in 2 hours. Markets pricing 78% probability of hold. Watch USD/EUR and gold for immediate reaction.',likes:'9.1K',rts:'4.3K',time:'18m ago'},
+  {platform:'𝕏',user:'ClimateDesk',handle:'@ClimateDesk',verified:true,text:'Bay of Bengal cyclonic system intensifying faster than models predicted. Now showing signs of rapid intensification. Bangladesh, Myanmar coastlines in immediate danger.',likes:'31.7K',rts:'18.5K',time:'25m ago'},
+];
+
+const ALERTS = [
+  {cls:'crit',ico:'🔴',title:'CRITICAL: Maritime Attack Confirmed',text:'Commercial vessel attacked in Red Sea corridor. International naval coalition responding. Rerouting advisory issued for commercial shipping.',time:'7m ago'},
+  {cls:'crit',ico:'🔴',title:'CRITICAL: Cyber Infrastructure Attack',text:'Major ransomware campaign targeting European energy grid operators. CERT teams deployed. Backup systems activated.',time:'34m ago'},
+  {cls:'warn',ico:'🟡',title:'WARNING: Cyclone Intensification',text:'Cyclonic system in Bay of Bengal upgraded to Category 3. Projected landfall in 36 hours. Coastal evacuations ordered in Bangladesh.',time:'51m ago'},
+  {cls:'warn',ico:'🟡',title:'WARNING: Political Instability',text:'Mass protests in three West African capitals. Government responding. Foreign nationals advised to exercise caution.',time:'1h 12m ago'},
+  {cls:'info',ico:'🔵',title:'INFO: Diplomatic Channels Active',text:'Back-channel negotiations between regional powers progressing. Senior mediators arrived in Doha.',time:'1h 44m ago'},
+  {cls:'info',ico:'🔵',title:'INFO: OPEC+ Emergency Call',text:'Unscheduled OPEC+ ministerial call scheduled for tomorrow. Oil markets watching closely.',time:'2h 08m ago'},
+];
+
+const TICKER_DATA = [
+  {sym:'BTC',val:'$98,240',chg:'+2.34%',up:true},
+  {sym:'ETH',val:'$3,841',chg:'+1.87%',up:true},
+  {sym:'SPX',val:'5,891',chg:'+0.82%',up:true},
+  {sym:'NDX',val:'21,044',chg:'+1.24%',up:true},
+  {sym:'GOLD',val:'$2,681',chg:'+0.34%',up:true},
+  {sym:'OIL',val:'$82.47',chg:'-0.88%',up:false},
+  {sym:'EUR/USD',val:'1.0841',chg:'-0.12%',up:false},
+  {sym:'GBP/USD',val:'1.2634',chg:'+0.08%',up:true},
+  {sym:'DZD/USD',val:'0.00743',chg:'-0.02%',up:false},
+  {sym:'DAX',val:'18,714',chg:'-0.31%',up:false},
+  {sym:'N225',val:'39,118',chg:'-0.54%',up:false},
+  {sym:'SOL',val:'$214.50',chg:'+4.21%',up:true},
+];
+
+const AI_RESPONSES = {
+  'conflict': 'Currently tracking 38 active conflicts globally. The most severe are: (1) Eastern Europe — ongoing large-scale conventional warfare; (2) Middle East — multi-front conflict with regional escalation risk; (3) Sahel — fragmented insurgencies affecting 5 nations. Severity index is at 7.4/10.',
+  'bitcoin': 'Bitcoin is trading at $98,240 (+2.34% in 24h). Key levels: Support at $94,000; Resistance at $100,000 psychological barrier. Market sentiment: Bullish. Hash rate at all-time high. ETF inflows surging. Next halving expected in April 2028.',
+  'algeria': 'Algeria status: STABLE. Security level: Green. No active conflicts within borders. Algeria is playing a key mediating role in Sahel peace process. Economy: Oil & gas revenues up 12% YoY. Diplomatic: Recent OPEC+ engagement constructive. Population: 46M. GDP: $280B.',
+  'market': 'Global market summary: US equities broadly higher (SPX +0.82%, NDX +1.24%). European markets mixed (DAX -0.31%, CAC +0.44%). Asia-Pacific under pressure (Nikkei -0.54%). Commodities: Oil declining on demand concerns. Gold stable. Crypto: Risk-on sentiment boosting BTC and ETH.',
+  'default': 'I\'m monitoring 192 countries with 247 live intelligence feeds. I can provide analysis on any conflict zone, market, country, weather event, or geopolitical development. What specific intelligence do you need?'
+};
+
+// ── PARTICLE LAUNCHER ──
+function initParticles() {
+  const wrap = document.getElementById('lpts');
+  const colors = ['rgba(0,178,90,0.6)','rgba(0,230,118,0.4)','rgba(77,255,160,0.5)'];
+  for (let i = 0; i < 30; i++) {
+    const p = document.createElement('div');
+    p.className = 'lp';
+    const s = 4 + Math.random()*10;
+    p.style.cssText = `width:${s}px;height:${s}px;left:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*3)]};animation-duration:${5+Math.random()*10}s;animation-delay:${Math.random()*5}s;`;
+    wrap.appendChild(p);
+  }
+}
+
+const STATUS_MSGS = [
+  'Initializing secure feeds…',
+  'Loading 247 intelligence channels…',
+  'Connecting to satellite network…',
+  'Authenticating market data feeds…',
+  'Loading global threat matrix…',
+  'Syncing 192-country database…',
+  'Calibrating AI systems…',
+  'FennecGlobe ready.'
+];
+let statusIdx = 0;
+function cycleStatus() {
+  if (statusIdx < STATUS_MSGS.length) {
+    document.getElementById('l-status').textContent = STATUS_MSGS[statusIdx++];
+    if (statusIdx < STATUS_MSGS.length) setTimeout(cycleStatus, 280);
+  }
+}
+
+function launch() {
+  initParticles();
+  cycleStatus();
+  setTimeout(() => {
+    document.getElementById('launcher').classList.add('out');
+    document.getElementById('nav').style.display = '';
+    document.getElementById('bb').style.display = '';
+    document.getElementById('ticker-bar').style.display = '';
+    document.getElementById('layout').style.display = '';
+    document.getElementById('footer-el').style.display = '';
+    document.getElementById('cf').style.display = '';
+    document.getElementById('af').style.display = '';
+    renderAll();
+    initTicker();
+    initCounters();
+    initScrollBehaviors();
+    loadSavedTheme();
+  }, 2800);
+}
+
+// ── RENDER FUNCTIONS ──
+function renderNews() {
+  const list = document.getElementById('news-list');
+  list.innerHTML = NEWS_DATA.map(n => `
+    <div class="news-item" onclick="showToast('Opening: ${n.title.substring(0,40)}…','📰')">
+      <div>
+        <div class="news-src">${n.src}</div>
+        <div style="font-size:20px;margin-top:4px;">${n.flag}</div>
+      </div>
+      <div class="news-body">
+        <div class="news-title">${n.title}</div>
+        <div class="news-meta">
+          <span class="news-time">${n.time}</span>
+          <span class="news-tag tag-${n.tags[0]}">${n.tag}</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderThreats() {
+  const sevMap = {C:'sev-c',H:'sev-h',M:'sev-m',L:'sev-l'};
+  document.getElementById('threat-list').innerHTML = THREATS.map(t => `
+    <div class="threat-item" onclick="showToast('${t.title}','⚠️')">
+      <div class="threat-sev ${sevMap[t.sev]}">${t.sev}</div>
+      <div class="threat-body">
+        <div class="threat-title">${t.title}</div>
+        <div class="threat-detail">${t.detail}</div>
+        <div class="threat-time">${t.time}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderMarkets() {
+  document.getElementById('mkt-cards').innerHTML = MARKETS.slice(0,6).map(m => `
+    <div class="mkt-card" onclick="showToast('${m.name}: ${m.val} ${m.chg}','📈')">
+      <div class="mkt-name">${m.name}</div>
+      <div class="mkt-val">${m.val}</div>
+      <div class="mkt-chg ${m.up?'up':'dn'}">${m.chg}</div>
+      <div class="mkt-spark">
+        <svg viewBox="0 0 100 30" preserveAspectRatio="none">
+          <polyline points="${generateSparkline(m.up)}" fill="none" stroke="${m.up?'#00e676':'#ff4444'}" stroke-width="1.5"/>
+        </svg>
+      </div>
+    </div>
+  `).join('');
+  
+  document.getElementById('mkt-table').innerHTML = `
+    <div class="mkt-full-list">
+      ${MARKETS.map(m => `
+        <div class="mkt-row" onclick="showToast('${m.name}: ${m.val}','📊')">
+          <div class="mkt-row-sym">${m.sym}</div>
+          <div class="mkt-row-name">${m.name}</div>
+          <div class="mkt-row-price">${m.val}</div>
+          <div class="mkt-row-chg ${m.up?'tick-up':'tick-dn'}">${m.chg}</div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function generateSparkline(up) {
+  let pts = [];
+  let y = up ? 20 : 10;
+  for (let i = 0; i <= 10; i++) {
+    y += (Math.random()-0.45) * 6;
+    y = Math.max(2, Math.min(28, y));
+    pts.push(`${i*10},${y}`);
+  }
+  if (up) { pts[pts.length-1] = `100,5`; } else { pts[pts.length-1] = `100,24`; }
+  return pts.join(' ');
+}
+
+function renderCrypto() {
+  document.getElementById('crypto-body').innerHTML = CRYPTO.map(c => `
+    <tr onclick="showToast('${c.name}: ${c.price} ${c.chg}','${c.ico}')">
+      <td style="color:var(--text-secondary);font-family:'JetBrains Mono',monospace;font-size:0.72rem;">${c.rank}</td>
+      <td>
+        <div class="ct-coin">
+          <div class="ct-ico">${c.ico}</div>
+          <div><div class="ct-name">${c.name}</div><div class="ct-sym">${c.sym}</div></div>
+        </div>
+      </td>
+      <td style="font-family:'JetBrains Mono',monospace;font-weight:600;">${c.price}</td>
+      <td class="${c.up?'tick-up':'tick-dn'}" style="font-family:'JetBrains Mono',monospace;font-size:0.78rem;">${c.chg}</td>
+      <td style="color:var(--text-secondary);font-size:0.75rem;">${c.mcap}</td>
+    </tr>
+  `).join('');
+}
+
+function renderWeather() {
+  document.getElementById('wx-grid').innerHTML = WEATHER.map(w => `
+    <div class="wx-card" onclick="showToast('${w.city}: ${w.temp}°C, ${w.cond}','${w.ico}')">
+      <div class="wx-city">${w.city}</div>
+      <div class="wx-ico">${w.ico}</div>
+      <div class="wx-temp">${wxCelsius ? w.temp+'°C' : Math.round(w.temp*9/5+32)+'°F'}</div>
+      <div class="wx-cond">${w.cond}</div>
+      <div class="wx-extra">💧${w.humidity} 💨${w.wind}</div>
+    </div>
+  `).join('');
+}
+
+function renderSocial() {
+  document.getElementById('social-list').innerHTML = SOCIAL.map(s => `
+    <div class="social-item" onclick="showToast('@${s.handle} trending','${s.platform}')">
+      <div class="si-header">
+        <span class="si-platform">${s.platform}</span>
+        <span class="si-user">${s.user}</span>
+        <span class="si-handle">${s.handle}</span>
+        ${s.verified ? '<span class="si-verified">✓</span>' : ''}
+      </div>
+      <div class="si-text">${s.text}</div>
+      <div class="si-stats">
+        <span class="si-stat">❤️ ${s.likes}</span>
+        <span class="si-stat">🔄 ${s.rts}</span>
+        <span class="si-stat">🕐 ${s.time}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderAlerts() {
+  document.getElementById('alert-list').innerHTML = ALERTS.map(a => `
+    <div class="alert-item ${a.cls}" onclick="showToast('${a.title}','${a.ico}')">
+      <div class="alert-hd">
+        <span class="alert-ico">${a.ico}</span>
+        <span class="alert-ttl">${a.title}</span>
+        <span class="alert-time">${a.time}</span>
+      </div>
+      <div class="alert-txt">${a.text}</div>
+    </div>
+  `).join('');
+}
+
+function renderAll() {
+  renderNews();
+  renderThreats();
+  renderMarkets();
+  renderCrypto();
+  renderWeather();
+  renderSocial();
+  renderAlerts();
+}
+
+// ── TICKER ──
+function initTicker() {
+  const track = document.getElementById('ticker-track');
+  const items = [...TICKER_DATA,...TICKER_DATA].map(t => `
+    <div class="tick-item">
+      <span class="tick-sym">${t.sym}</span>
+      <span class="tick-val">${t.val}</span>
+      <span class="tick-chg ${t.up?'tick-up':'tick-dn'}">${t.chg}</span>
+    </div>
+    <span class="tick-sep">·</span>
+  `).join('');
+  track.innerHTML = items;
+}
+
+// ── COUNTERS ──
+function initCounters() {
+  animCount('stat-conflicts', 0, 38, 1200);
+  animCount('stat-feeds', 0, 247, 1500);
+  animCount('stat-news', 0, 1842, 1800);
+  animCount('stat-alerts', 0, 9, 800);
+}
+
+function animCount(id, from, to, dur) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const start = Date.now();
+  const tick = () => {
+    const p = Math.min(1, (Date.now()-start)/dur);
+    const val = Math.floor(from + (to-from)*easeOut(p));
+    el.textContent = val.toLocaleString();
+    if (p < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+function easeOut(t) { return 1-(1-t)*(1-t); }
+
+// ── SCROLL BEHAVIORS ──
+function initScrollBehaviors() {
+  window.addEventListener('scroll', () => {
+    const stt = document.getElementById('stt');
+    if (window.scrollY > 400) stt.classList.add('show');
+    else stt.classList.remove('show');
+  });
+}
+
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+// ── THEME ──
+function setTheme(theme) {
+  const root = document.documentElement;
+  document.querySelectorAll('.theme-option').forEach(o => {
+    o.classList.toggle('active', o.dataset.theme === theme);
+  });
+  if (theme === 'green') root.removeAttribute('data-theme');
+  else root.setAttribute('data-theme', theme);
+  try { localStorage.setItem('fg-theme', theme); } catch(e) {}
+  showToast(`Theme: ${theme.charAt(0).toUpperCase()+theme.slice(1)}`,'🎨');
+}
+
+function loadSavedTheme() {
+  try {
+    const t = localStorage.getItem('fg-theme');
+    if (t) setTheme(t);
+  } catch(e) {}
+}
+
+// ── SIDEBAR ──
+function toggleSb() {
+  sbVisible = !sbVisible;
+  document.getElementById('bk-sb').classList.toggle('hidden', !sbVisible);
+}
+
+// ── SETTINGS ──
+function toggleSp() {
+  document.getElementById('sp').classList.toggle('open');
+  document.getElementById('sp-ov').classList.toggle('vis');
+}
+
+function toggleSetting(btn, key) {
+  btn.classList.toggle('on');
+  const state = btn.classList.contains('on') ? 'ON' : 'OFF';
+  showToast(`${key}: ${state}`,'⚙️');
+}
+
+// ── MARKETS ──
+function setMktView(view) {
+  mktView = view;
+  document.getElementById('mkt-cards').style.display = view==='cards' ? 'grid' : 'none';
+  document.getElementById('mkt-table').style.display = view==='table' ? 'block' : 'none';
+}
+
+// ── WEATHER ──
+function toggleWxUnit() {
+  wxCelsius = !wxCelsius;
+  renderWeather();
+  showToast(`Showing temperatures in ${wxCelsius?'Celsius':'Fahrenheit'}`,'🌡️');
+}
+
+// ── MAP ──
+function toggleLayer(btn, name) {
+  btn.classList.toggle('active');
+  if (layersActive.has(name)) layersActive.delete(name);
+  else layersActive.add(name);
+  showToast(`Layer ${btn.classList.contains('active')?'enabled':'disabled'}: ${name}`,'🗺️');
+}
+
+// ── AUTH ──
+function openAuth() {
+  document.getElementById('auth-modal').classList.add('open');
+}
+function closeAuth() {
+  document.getElementById('auth-modal').classList.remove('open');
+}
+function doAuth(method) {
+  closeAuth();
+  setTimeout(() => {
+    currentUser = {name:'User', method};
+    const av = document.getElementById('user-avatar');
+    av.textContent = '👤';
+    av.classList.add('visible');
+    document.querySelector('.auth-btn-nav').style.display = 'none';
+    showToast(`Signed in with ${method} — Welcome to FennecGlobe! 🎉`,'🔒');
+  }, 300);
+}
+function doAuthEmail() {
+  const email = document.getElementById('auth-email').value;
+  if (!email || !email.includes('@')) { showToast('Please enter a valid email','⚠️'); return; }
+  doAuth('Email');
+}
+function showUserMenu() {
+  showToast('Account settings — coming soon','👤');
+}
+
+// ── AI ──
+function toggleAi() {
+  aiOpen = !aiOpen;
+  document.getElementById('ai-panel').classList.toggle('open', aiOpen);
+}
+
+function aiSend(msg) {
+  const msgs = document.getElementById('ai-msgs');
+  msgs.innerHTML += `<div class="ai-msg user">${msg}</div>`;
+  msgs.scrollTop = msgs.scrollHeight;
+  
+  const lower = msg.toLowerCase();
+  let resp = AI_RESPONSES.default;
+  if (lower.includes('conflict') || lower.includes('war')) resp = AI_RESPONSES.conflict;
+  else if (lower.includes('bitcoin') || lower.includes('btc') || lower.includes('crypto')) resp = AI_RESPONSES.bitcoin;
+  else if (lower.includes('algeria')) resp = AI_RESPONSES.algeria;
+  else if (lower.includes('market')) resp = AI_RESPONSES.market;
+  
+  setTimeout(() => {
+    msgs.innerHTML += `<div class="ai-msg bot">${resp}</div>`;
+    msgs.scrollTop = msgs.scrollHeight;
+  }, 700);
+}
+
+function aiSendInput() {
+  const input = document.getElementById('ai-input');
+  const msg = input.value.trim();
+  if (!msg) return;
+  input.value = '';
+  aiSend(msg);
+}
+
+// ── SEARCH ──
+function handleSearch(val) {
+  if (val.length < 2) return;
+  showToast(`Searching: "${val}"…`,'🔍');
+}
+
+// ── LOAD MORE NEWS ──
+let newsLoadCount = 0;
+const MORE_NEWS = [
+  {flag:'🇸🇦',src:'Arab News',title:'Saudi Arabia announces $500B NEOM expansion phase two timeline',time:'50m ago',tags:['b'],tag:'INVEST'},
+  {flag:'🇺🇸',src:'WSJ',title:'US Treasury announces new sanctions package targeting financial networks',time:'55m ago',tags:['r'],tag:'SANCTIONS'},
+  {flag:'🌊',src:'Nature',title:'Ocean heat content reaches new record — scientists warn of accelerating feedback loops',time:'1h ago',tags:['o'],tag:'CLIMATE'},
+];
+
+function loadMoreNews() {
+  if (newsLoadCount >= MORE_NEWS.length) {
+    showToast('All stories loaded','📰');
+    return;
+  }
+  const n = MORE_NEWS[newsLoadCount++];
+  const list = document.getElementById('news-list');
+  const div = document.createElement('div');
+  div.className = 'news-item';
+  div.innerHTML = `
+    <div><div class="news-src">${n.src}</div><div style="font-size:20px;margin-top:4px;">${n.flag}</div></div>
+    <div class="news-body">
+      <div class="news-title">${n.title}</div>
+      <div class="news-meta"><span class="news-time">${n.time}</span><span class="news-tag tag-${n.tags[0]}">${n.tag}</span></div>
+    </div>
+  `;
+  div.onclick = () => showToast('Opening story…','📰');
+  list.insertBefore(div, list.lastElementChild);
+}
+
+// ── TOAST ──
+function showToast(msg, ico='ℹ️') {
+  const c = document.getElementById('toast-c');
+  const t = document.createElement('div');
+  t.className = 'toast';
+  t.innerHTML = `<span class="toast-ico">${ico}</span><span>${msg}</span>`;
+  c.appendChild(t);
+  setTimeout(() => t.remove(), 4200);
+}
+
+// ── LIVE DATA SIMULATION ──
+function simulateLiveUpdates() {
+  setInterval(() => {
+    // Update stat counters with small random changes
+    const newsEl = document.getElementById('stat-news');
+    if (newsEl) {
+      const cur = parseInt(newsEl.textContent.replace(',',''));
+      newsEl.textContent = (cur + Math.floor(Math.random()*3)).toLocaleString();
+    }
+  }, 8000);
+  
+  // Simulate breaking news bar rotation
+  const breakingTexts = [
+    'Emergency security council meeting convened — live coverage continues',
+    'Red Sea shipping lane attack: International coalition responding',
+    'Markets react to Fed statement — S&P +0.82% in afternoon trading',
+    'Bay of Bengal cyclone upgraded to Category 3 — evacuations underway',
+  ];
+  let bIdx = 0;
+  setInterval(() => {
+    bIdx = (bIdx+1)%breakingTexts.length;
+    const el = document.getElementById('bb-text');
+    if (el) el.textContent = breakingTexts[bIdx];
+  }, 12000);
+}
+
+// ── KEYBOARD SHORTCUTS ──
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeAuth();
+    if (aiOpen) toggleAi();
+    if (document.getElementById('sp').classList.contains('open')) toggleSp();
+  }
+  if (e.key === '/' && document.activeElement.tagName !== 'INPUT') {
+    e.preventDefault();
+    document.getElementById('nav-search').focus();
+  }
+  if (e.key === 'k' && (e.ctrlKey || e.metaKey)) {
+    e.preventDefault();
+    document.getElementById('nav-search').focus();
+  }
+});
+
+// ── INIT ──
+window.addEventListener('DOMContentLoaded', () => {
+  launch();
+  simulateLiveUpdates();
+  console.log('%c🌍 FennecGlobe Intelligence Platform', 'color:#00b35a;font-size:18px;font-weight:bold;');
+  console.log('%c192 countries · 247 feeds · Real-time AI · Secure', 'color:#8dd4ac;font-size:12px;');
+});
+</script>
+</body>
+</html>
